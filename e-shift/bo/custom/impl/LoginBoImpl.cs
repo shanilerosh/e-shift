@@ -12,7 +12,7 @@ namespace e_shift.bo.custom.impl
 {
     internal class LoginBoImpl : LoginBo
     {
-        public UserDto Login(UserDto userDto)
+        public UserDto Login(UserDto userDto, bool isAdmin)
         {
             //check if an user exist with the username
             bool ifUserNameExist = new UserDaoImpl().CheckWithUserName(userDto.Username);
@@ -24,6 +24,12 @@ namespace e_shift.bo.custom.impl
             User? user = new UserDaoImpl().CheckWithUserNameAndPass(userDto.Username, userDto.Password);
 
             Assert.IsNull(user, "Invalid credentials for the user "+userDto.Username);
+
+            //customer logged in with wrong user type
+            if (isAdmin && user.Role.Equals(Role.CUSTOMER)){
+
+                throw new InvalidDataException("User logged in with wrong type");
+            }
 
 
             return UserDto.Builder().WithUserName(user.Username).WithRole(user.Role).WithUid(userDto.Uid).Build();

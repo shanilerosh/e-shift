@@ -11,8 +11,8 @@ namespace e_shift.controller
     internal class LoginController
     {
 
-        public UserDto LoginUser(UserDto userDto) {
-            return new LoginBoImpl().Login(userDto);
+        public UserDto LoginUser(UserDto userDto, bool isAdmin) {
+            return new LoginBoImpl().Login(userDto,isAdmin);
           
         }
 

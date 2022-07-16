@@ -11,6 +11,7 @@ namespace e_shift.utility
 
         //entites
         public static readonly string CUSTOMER = "Customer";
+        public static readonly string ITEM = "Item";
         public static readonly string TRANSPORT_UNIT = "Transport Unit";
 
         //System error

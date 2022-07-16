@@ -9,6 +9,6 @@ namespace e_shift.bo.custom
 {
     internal interface LoginBo
     {
-        UserDto Login(UserDto userDto);
+        UserDto Login(UserDto userDto, bool isAdmin);
     }
 }

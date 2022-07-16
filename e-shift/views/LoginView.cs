@@ -33,7 +33,8 @@ namespace e_shift.views
                 UserDto userDto = UserDto.Builder()
                       .WithUserName(username).WithPassword(password).Build();
 
-                UserDto loggedUser = new LoginController().LoginUser(userDto);
+                UserDto loggedUser = new LoginController().LoginUser(userDto
+                    ,radioAdmin.Checked);
 
                 if (null != loggedUser)
                 {

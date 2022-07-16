@@ -17,7 +17,7 @@ namespace e_shift
             ApplicationConfiguration.Initialize();
 
             UserDto userDto = new UserDto(1, "Shanil", Role.ADMIN);
-            Application.Run(new LoginView());
+            Application.Run(new ItemView());
         }
     }
 }

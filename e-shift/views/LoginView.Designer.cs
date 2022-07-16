@@ -132,6 +132,7 @@
             // radioCustomer
             // 
             this.radioCustomer.AutoSize = true;
+            this.radioCustomer.Checked = true;
             this.radioCustomer.Location = new System.Drawing.Point(5, 16);
             this.radioCustomer.Name = "radioCustomer";
             this.radioCustomer.Size = new System.Drawing.Size(77, 19);
@@ -148,7 +149,6 @@
             this.radioAdmin.Name = "radioAdmin";
             this.radioAdmin.Size = new System.Drawing.Size(61, 19);
             this.radioAdmin.TabIndex = 19;
-            this.radioAdmin.TabStop = true;
             this.radioAdmin.Text = "Admin";
             this.radioAdmin.UseVisualStyleBackColor = true;
             this.radioAdmin.CheckedChanged += new System.EventHandler(this.Hanlde_radio_admin_change);
