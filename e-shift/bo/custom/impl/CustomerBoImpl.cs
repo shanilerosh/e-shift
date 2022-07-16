@@ -2,6 +2,7 @@
 using e_shift.dao.custom.impl;
 using e_shift.dto;
 using e_shift.entity;
+using e_shift.utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,10 +16,20 @@ namespace e_shift.bo.custom.impl
     {
 
         private ICustomerDao dao = new CustomerDaoImpl();
-        public bool AddCustomer(CustomerDto customer)
+        private IUserDao userDao = new UserDaoImpl();
+        public bool AddCustomer(CustomerDto customerDto)
         {
-            return dao
-                .Add(new Customer(this.GetCustomerId(), customer.FirstName, customer.LastName, customer.Nic, customer.Address, customer.ContactNumber));
+            //check username is duplicated
+            bool isExist = userDao.CheckWithUserName(customerDto.UserName);
+
+            Assert.IsFalse(isExist, "User with the username " + customerDto.UserName + " already exist. Please try again with a new username");
+
+            var userEntity = new User(customerDto.UserName, customerDto.Password, Role.CUSTOMER);
+            var customerEntity = new Customer(GetCustomerId(), customerDto.FirstName, customerDto.LastName,
+                customerDto.Nic, customerDto.Address, customerDto.ContactNumber);
+
+            //Transactional --> create new Customer and user
+            return dao.CreateUserAndCustomerTransaction(customerEntity, userEntity);
 
         }
 

@@ -14,29 +14,61 @@ namespace e_shift.dao.custom.impl
 {
     internal class CustomerDaoImpl : ICustomerDao
     {
-
-        public bool Add(Customer entity)
+        //Transaction Event Where two tables get effected
+        public bool Add(Customer customer)
         {
+            return true;
+
+            
+        }
+
+        public bool CreateUserAndCustomerTransaction(Customer customer, User user)
+        {
+
+            /*Get the singleton connection*/
+            var conn = DbConnection.GetInstance().GetConnection();
+
+            conn.Open();
+            //begin transaction
+            var transaction = conn.BeginTransaction();
 
             try
             {
-                var keyValPair = new Dictionary<string, object>();
+                //create the user first
+                var userCommand = new
+                    SqlCommand("INSERT INTO db.userdata(username,password,role) VALUES (@username,@password,@role); SELECT SCOPE_IDENTITY()", conn, transaction);
+                userCommand.Parameters.AddWithValue("@username", user.Username);
+                userCommand.Parameters.AddWithValue("@password", user.Password);
+                userCommand.Parameters.AddWithValue("@role", user.Role.ToString());
 
-                keyValPair.Add("@cid", entity.Cid);
-                keyValPair.Add("@firstName", entity.FirstName);
-                keyValPair.Add("@lastName", entity.LastName);
-                keyValPair.Add("@nic", entity.Nic);
-                keyValPair.Add("@address", entity.Address);
-                keyValPair.Add("@contactNumber", entity.ContactNumber);
-                
+                object userId = userCommand.ExecuteScalar();
 
-                return CrudUtil.ExecuteUpdateDelete("INSERT INTO db.customer(cid,firstname,lastname,nic,address,contactnumber) Values (@cid,@firstName,@lastName,@nic,@address,@contactNumber)",
-                    keyValPair);
+                //create the customer entry
+                var custCommand = new
+                    SqlCommand("INSERT INTO db.customer(cid,firstname,lastname,nic,address,contactNumber,uid) Values (@cid,@firstName,@lastName,@nic,@address,@contactNumber,@uid)", conn, transaction);
+
+                custCommand.Parameters.AddWithValue("@cid", customer.Cid);
+                custCommand.Parameters.AddWithValue("@firstName", customer.FirstName);
+                custCommand.Parameters.AddWithValue("@lastName", customer.LastName);
+                custCommand.Parameters.AddWithValue("@nic", customer.Nic);
+                custCommand.Parameters.AddWithValue("@address", customer.Address);
+                custCommand.Parameters.AddWithValue("@contactNumber", customer.ContactNumber);
+                custCommand.Parameters.AddWithValue("@uid", userId);
+
+                var isDone = custCommand.ExecuteNonQuery();
+                //if success commit transaction
+                transaction.Commit();
+                return isDone > 0;
+
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                //if an excemption occured rollback to the original state
+                transaction.Rollback();
                 throw;
+            }
+            finally {
+                conn.Close();
             }
         }
 

@@ -78,7 +78,45 @@ namespace e_shift.dao.custom.impl
             
             }
             
+            //TODO - Close Connection
             return null;
+        }
+
+
+        public User? CheckWithUserNameAndGetUserObj(string username)
+        {
+            var keyValPair = new Dictionary<string, object>();
+
+            keyValPair.Add("username", username);
+
+            SqlDataReader reader = CrudUtil.ExecuteSelectQuery("SELECT * from db.userdata WHERE username = @username", keyValPair);
+
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    Role role = (Role)Enum.Parse(typeof(Role), reader.GetString(3));
+                    return new User(reader.GetInt32(0), reader.GetString(1), role);
+                }
+
+            }
+            //TODO - Close Connection
+            return null;
+        }
+
+        public bool CreateNewUser(User user)
+        {
+            var keyValPair = new Dictionary<string, object>();
+
+            keyValPair.Add("@username", user.Username);
+            keyValPair.Add("@password", user.Password);
+            keyValPair.Add("@role", user.Role.ToString());
+            
+
+
+            return CrudUtil.ExecuteUpdateDelete("INSERT INTO db.userdata(username,password,role) VALUES (@username,@password,@role)",
+                keyValPair);
         }
 
         public bool Delete(string id)

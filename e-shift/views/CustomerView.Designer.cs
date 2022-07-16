@@ -38,18 +38,17 @@
             this.txtNic = new System.Windows.Forms.TextBox();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
-            this.customerDataGridView = new System.Windows.Forms.DataGridView();
             this.lblCustId = new System.Windows.Forms.Label();
             this.customerIdNameLabel = new System.Windows.Forms.Label();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.searchCombo = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.txtAddress = new System.Windows.Forms.RichTextBox();
             this.txtContactNumber = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.customerDataGridView)).BeginInit();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtUserName = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,7 +62,6 @@
             this.label1.Size = new System.Drawing.Size(246, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Customer Management";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -74,7 +72,6 @@
             this.label2.Size = new System.Drawing.Size(62, 14);
             this.label2.TabIndex = 1;
             this.label2.Text = "First Name";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -85,7 +82,6 @@
             this.label3.Size = new System.Drawing.Size(60, 14);
             this.label3.TabIndex = 2;
             this.label3.Text = "Last Name";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -106,7 +102,6 @@
             this.label5.Size = new System.Drawing.Size(46, 14);
             this.label5.TabIndex = 4;
             this.label5.Text = "Address";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // txtFirstName
             // 
@@ -114,7 +109,6 @@
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(179, 23);
             this.txtFirstName.TabIndex = 5;
-            this.txtFirstName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // txtLastName
             // 
@@ -122,7 +116,6 @@
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(179, 23);
             this.txtLastName.TabIndex = 6;
-            this.txtLastName.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // txtNic
             // 
@@ -138,13 +131,13 @@
             this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubmit.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnSubmit.ForeColor = System.Drawing.Color.White;
-            this.btnSubmit.Location = new System.Drawing.Point(486, 246);
+            this.btnSubmit.Location = new System.Drawing.Point(264, 302);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(85, 23);
             this.btnSubmit.TabIndex = 9;
             this.btnSubmit.Text = "Create";
             this.btnSubmit.UseVisualStyleBackColor = false;
-            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_onClick);
+            this.btnSubmit.Click += new System.EventHandler(this.BtnSubmit_onClick);
             // 
             // btnReset
             // 
@@ -153,26 +146,13 @@
             this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReset.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnReset.ForeColor = System.Drawing.Color.White;
-            this.btnReset.Location = new System.Drawing.Point(48, 244);
+            this.btnReset.Location = new System.Drawing.Point(50, 302);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 10;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = false;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_onClick);
-            // 
-            // customerDataGridView
-            // 
-            this.customerDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.customerDataGridView.Location = new System.Drawing.Point(46, 338);
-            this.customerDataGridView.MultiSelect = false;
-            this.customerDataGridView.Name = "customerDataGridView";
-            this.customerDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.customerDataGridView.RowTemplate.Height = 25;
-            this.customerDataGridView.Size = new System.Drawing.Size(654, 196);
-            this.customerDataGridView.TabIndex = 11;
-            this.customerDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.customerDataGridView_CellContentClick);
-            this.customerDataGridView.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.On_Row_Click);
+            this.btnReset.Click += new System.EventHandler(this.BtnReset_onClick);
             // 
             // lblCustId
             // 
@@ -182,7 +162,6 @@
             this.lblCustId.Name = "lblCustId";
             this.lblCustId.Size = new System.Drawing.Size(0, 23);
             this.lblCustId.TabIndex = 12;
-            this.lblCustId.Click += new System.EventHandler(this.label6_Click);
             // 
             // customerIdNameLabel
             // 
@@ -194,39 +173,6 @@
             this.customerIdNameLabel.TabIndex = 13;
             this.customerIdNameLabel.Text = "Customer ID :";
             // 
-            // btnDelete
-            // 
-            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
-            this.btnDelete.FlatAppearance.BorderSize = 0;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(600, 244);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(80, 24);
-            this.btnDelete.TabIndex = 14;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_click);
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(167, 309);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.PlaceholderText = "Type to search";
-            this.txtSearch.Size = new System.Drawing.Size(204, 23);
-            this.txtSearch.TabIndex = 15;
-            this.txtSearch.TextChanged += new System.EventHandler(this.txtsearch_Change);
-            // 
-            // searchCombo
-            // 
-            this.searchCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.searchCombo.FormattingEnabled = true;
-            this.searchCombo.Location = new System.Drawing.Point(50, 309);
-            this.searchCombo.Name = "searchCombo";
-            this.searchCombo.Size = new System.Drawing.Size(93, 23);
-            this.searchCombo.TabIndex = 16;
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(248)))), ((int)(((byte)(247)))));
@@ -236,7 +182,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1196, 55);
             this.panel1.TabIndex = 17;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
             // 
             // label6
             // 
@@ -249,7 +194,6 @@
             this.label6.Size = new System.Drawing.Size(123, 23);
             this.label6.TabIndex = 1;
             this.label6.Text = "Add Customer";
-            this.label6.Click += new System.EventHandler(this.label6_Click_1);
             // 
             // txtAddress
             // 
@@ -276,6 +220,41 @@
             this.label7.TabIndex = 19;
             this.label7.Text = "Contact Number";
             // 
+            // txtPassword
+            // 
+            this.txtPassword.Location = new System.Drawing.Point(265, 254);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(179, 23);
+            this.txtPassword.TabIndex = 24;
+            this.txtPassword.UseSystemPasswordChar = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(266, 235);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(54, 14);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "Password";
+            // 
+            // txtUserName
+            // 
+            this.txtUserName.Location = new System.Drawing.Point(50, 254);
+            this.txtUserName.Name = "txtUserName";
+            this.txtUserName.Size = new System.Drawing.Size(179, 23);
+            this.txtUserName.TabIndex = 22;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(51, 235);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(63, 14);
+            this.label9.TabIndex = 21;
+            this.label9.Text = "User Name";
+            // 
             // CustomerView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -283,17 +262,17 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(719, 546);
             this.ControlBox = false;
+            this.Controls.Add(this.txtPassword);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.txtUserName);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.txtContactNumber);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.searchCombo);
-            this.Controls.Add(this.txtSearch);
-            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.customerIdNameLabel);
             this.Controls.Add(this.lblCustId);
-            this.Controls.Add(this.customerDataGridView);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.txtNic);
@@ -308,8 +287,6 @@
             this.Name = "CustomerView";
             this.ShowInTaskbar = false;
             this.Text = "CustomerView";
-            this.Load += new System.EventHandler(this.CustomerView_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.customerDataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -331,16 +308,16 @@
         private TextBox txtNic;
         private Button btnSubmit;
         private Button btnReset;
-        private DataGridView customerDataGridView;
         private Label lblCustId;
         private Label customerIdNameLabel;
-        private Button btnDelete;
-        private TextBox txtSearch;
-        private ComboBox searchCombo;
         private Panel panel1;
         private Label label6;
         private RichTextBox txtAddress;
         private TextBox txtContactNumber;
         private Label label7;
+        private TextBox txtPassword;
+        private Label label8;
+        private TextBox txtUserName;
+        private Label label9;
     }
 }

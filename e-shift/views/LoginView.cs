@@ -1,15 +1,6 @@
 ﻿using e_shift.controller;
 using e_shift.dto;
 using e_shift.utility;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace e_shift.views
 {
@@ -20,17 +11,17 @@ namespace e_shift.views
         {
             InitializeComponent();
 
-            
+
             //default resets
             ConductDefaultResets();
-            
-            
+
+
         }
 
-       
-        
 
-        
+
+
+
         /*Handle Submit Button click*/
         private void btnSubmit_onClick(object sender, EventArgs e)
         {
@@ -53,7 +44,8 @@ namespace e_shift.views
                     Hide();
 
                 }
-                else {
+                else
+                {
                     MessageBox.Show(Constants.SYSTEM_ERROR);
                 }
 
@@ -73,19 +65,21 @@ namespace e_shift.views
             }
         }
 
-       
-        private void ClearFields() {
-        
+
+        private void ClearFields()
+        {
+
 
         }
 
-        private void ConductDefaultResets() {
+        private void ConductDefaultResets()
+        {
 
-            //change button txt and flag
-        
+            btnCreate.Hide();
+
         }
 
-       
+
         private void customerDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -100,5 +94,32 @@ namespace e_shift.views
         {
 
         }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void handle_customer_radio_chane(object sender, EventArgs e)
+        {
+            if (radioCustomer.Checked) {
+                btnCreate.Show();
+            }
+        }
+
+        private void Hanlde_radio_admin_change(object sender, EventArgs e)
+        {
+            if (radioAdmin.Checked) { 
+                btnCreate.Hide();
+            }
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            CustomerView customerView = new CustomerView();
+            customerView.Show();
+
+            this.Hide();
+        }
     }
-}  
+}

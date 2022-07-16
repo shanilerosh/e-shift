@@ -15,6 +15,14 @@ namespace e_shift.utility
             }
         }
 
+        public static void IsFalse(Boolean expression, string message)
+        {
+            if (expression)
+            {
+                throw new InvalidDataException(message);
+            }
+        }
+
         public static void IsNull(Object obj, String message)
         {
             if (null == obj)

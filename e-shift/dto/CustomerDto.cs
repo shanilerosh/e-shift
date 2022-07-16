@@ -14,12 +14,16 @@ namespace e_shift.dto
         private String _nic;
         private String _address;
         private String _contactNumber;
+        private String _userName;
+        private String _password;
 
         public string FirstName { get => _firstName; set => _firstName = value; }
         public string LastName { get => _lastName; set => _lastName = value; }
         public string Nic { get => _nic; set => _nic = value; }
         public string Address { get => _address; set => _address = value; }
         public string ContactNumber { get => _contactNumber; set => _contactNumber = value; }
+        public string UserName { get => _userName; set => _userName = value; }
+        public string Password { get => _password; set => _password = value; }
 
 
 
@@ -60,6 +64,20 @@ namespace e_shift.dto
         {
             Assert.HasText(name, "Contact number cannot be empty");
             this.ContactNumber = name;
+            return this;
+        }
+
+        public CustomerDto WithUserName(string name)
+        {
+            Assert.HasText(name, "Username cannot be empty");
+            this.UserName = name;
+            return this;
+        }
+
+        public CustomerDto WithPassword(string name)
+        {
+            Assert.HasText(name, "Password cannot be empty");
+            this.Password = name;
             return this;
         }
 
