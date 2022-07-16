@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace e_shift.dao.custom
 {
-    internal interface ICustomerDao : CrudDao<Customer, String>
+    internal interface ITransportUnitDao : CrudDao<TransportUnit, String>
     {
-        String GetCustomerId();
+        String GetTransportUnitId();
 
-        DataTable SearchCustomers(string field, string val);
+        DataTable SearchTransportUnit(string field, string val);
     }
 }

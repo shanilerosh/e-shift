@@ -18,21 +18,42 @@ namespace e_shift.dao.custom.impl
         public bool Add(Customer entity)
         {
 
-            IDictionary<string, string> keyValPair =
-                CommonConverter<Customer>.convertObjectToDirectory(entity);
+            try
+            {
+                var keyValPair = new Dictionary<string, object>();
 
-            return CrudUtil.ExecuteUpdateDelete("INSERT INTO db.customer(cid,firstname,lastname,nic,address) Values (@cid,@firstName,@lastName,@nic,@address)",
+                keyValPair.Add("@cid", entity.Cid);
+                keyValPair.Add("@firstName", entity.FirstName);
+                keyValPair.Add("@lastName", entity.LastName);
+                keyValPair.Add("@nic", entity.Nic);
+                keyValPair.Add("@address", entity.Address);
+                keyValPair.Add("@contactNumber", entity.ContactNumber);
+                
+
+                return CrudUtil.ExecuteUpdateDelete("INSERT INTO db.customer(cid,firstname,lastname,nic,address,contactnumber) Values (@cid,@firstName,@lastName,@nic,@address,@contactNumber)",
+                    keyValPair);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool Delete(string id)
+        {
+            var keyValPair = new Dictionary<string, object>();
+
+            //adding cid for the where clause
+            keyValPair.Add("@cid", id);
+
+            return CrudUtil.ExecuteUpdateDelete("DELETE FROM db.customer WHERE cid = @cid",
                 keyValPair);
         }
 
-        public bool Delete(Customer entity)
+        public DataTable GetAll()
         {
-            throw new NotImplementedException();
-        }
-
-        public DataTable GetAll(Customer entity)
-        {
-            throw new NotImplementedException();
+            return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT * FROM db.customer");
         }
 
         public string GetCustomerId()
@@ -61,9 +82,28 @@ namespace e_shift.dao.custom.impl
             return null;
         }
 
+        public DataTable SearchCustomers(string fields, string val)
+        {
+
+            return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT * FROM db.customer WHERE "+ fields + " LIKE '%" +val+ "%'");
+            
+
+        }
+
         public bool Update(Customer entity)
         {
-            throw new NotImplementedException();
+            var keyValPair = new Dictionary<string, object>();
+
+            keyValPair.Add("@firstName", entity.FirstName);
+            keyValPair.Add("@lastName", entity.LastName);
+            keyValPair.Add("@nic", entity.Nic);
+            keyValPair.Add("@address", entity.Address);
+            keyValPair.Add("@contactNumber", entity.ContactNumber);
+            keyValPair.Add("@cid", entity.Cid);
+
+            return CrudUtil
+                .ExecuteUpdateDelete("UPDATE db.customer SET firstname = @firstName ,lastname = @lastname ,nic = @nic ,address = @address, contactnumber = @contactnumber WHERE cid = @cid",
+                keyValPair);
         }
     }
 }

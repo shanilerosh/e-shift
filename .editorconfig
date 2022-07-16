@@ -1,0 +1,10 @@
+﻿[*.{cs,vb}]
+
+# IDE0032: Use auto property
+dotnet_style_prefer_auto_properties = false
+
+# CS8766: Nullability of reference types in return type doesn't match implicitly implemented member (possibly because of nullability attributes).
+dotnet_diagnostic.CS8766.severity = silent
+
+# CS8604: Possible null reference argument.
+dotnet_diagnostic.CS8604.severity = silent

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace e_shift.bo
+namespace e_shift.utility
 {
-    internal interface ISuperBo
+    public enum Role
     {
+        ADMIN,
+        CUSTOMER
     }
 }

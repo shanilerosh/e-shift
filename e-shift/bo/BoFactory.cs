@@ -22,14 +22,6 @@ namespace e_shift.bo
             LOGIN, CUSTOMER
         }
 
-        public SuperBo GetBo(BoTypes types) {
-            switch (types) {
-                case BoTypes.LOGIN:
-                    return null;
-                default:
-                    return null;
-            }
-        
-        }
+       
     }
 }

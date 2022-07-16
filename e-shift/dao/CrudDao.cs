@@ -11,8 +11,8 @@ namespace e_shift.dao
     {
         bool Add(T entity);
         bool Update(T entity);
-        bool Delete(T entity);
-        DataTable GetAll(T entity);
+        bool Delete(ID id);
+        DataTable GetAll();
 
 
     }

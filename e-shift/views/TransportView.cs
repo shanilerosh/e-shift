@@ -13,18 +13,18 @@ using System.Windows.Forms;
 
 namespace e_shift.views
 {
-    public partial class CustomerView : Form
+    public partial class TransportView : Form
     {
         private bool _isUpdate = false;
 
-        public CustomerView()
+        public TransportView()
         {
             InitializeComponent();
 
             //load data to the grid
-            LoadCustomerData();
+            LoadTransportUnitData();
             //load latest id
-            SetCustomerID();
+            SetTransportId();
             //default resets
             ConductDefaultResets();
             //set values to search compbo
@@ -53,12 +53,38 @@ namespace e_shift.views
             searchCombo.SelectedIndex = 0;
         }
 
+
+        public void SetValueVehicleTypeCombo()
+        {
+
+
+            ComboBoxItem firstNameItem = new ComboBoxItem();
+            firstNameItem.Text = "First Name";
+            firstNameItem.Value = "firstname";
+
+            ComboBoxItem lstNameItem = new ComboBoxItem();
+            lstNameItem.Text = "Last Name";
+            lstNameItem.Value = "lastname";
+
+            ComboBoxItem nicItem = new ComboBoxItem();
+            nicItem.Text = "NIC";
+            nicItem.Value = "nic";
+
+            searchCombo.Items.Add(firstNameItem);
+            searchCombo.Items.Add(lstNameItem);
+            searchCombo.Items.Add(nicItem);
+
+            searchCombo.SelectedIndex = 0;
+        }
+
+
+
         //Get the values from the controller and set to the datagrid
-        public void LoadCustomerData() {
+        public void LoadTransportUnitData() {
             try
             {
                 //set values to the data grid
-                customerDataGridView.DataSource = new CustomerController().GetAllCustomers();
+                gridTransportUnit.DataSource = new TransportUnitController().GetAllTransportUnits();
 
                 ChangeHeaderNames();
                 
@@ -72,21 +98,20 @@ namespace e_shift.views
 
         private void ChangeHeaderNames()
         {
-            customerDataGridView.Columns[0].HeaderText = "ID";
-            customerDataGridView.Columns[1].HeaderText = "First Name";
-            customerDataGridView.Columns[2].HeaderText = "Last Name";
-            customerDataGridView.Columns[3].HeaderText = "NIC";
-            customerDataGridView.Columns[4].HeaderText = "Address";
-            customerDataGridView.Columns[5].HeaderText = "Contact Number";
+            gridTransportUnit.Columns[0].HeaderText = "TID";
+            gridTransportUnit.Columns[1].HeaderText = "Vehicle Type";
+            gridTransportUnit.Columns[2].HeaderText = "Model";
+            gridTransportUnit.Columns[3].HeaderText = "Vehicle No";
+            gridTransportUnit.Columns[4].HeaderText = "Capacity";
         }
 
-        public void SetCustomerID()
+        public void SetTransportId()
         {
             try
             {
                 //set values to the data grid
-                string custId = new CustomerController().GetCustId();
-                lblCustId.Text = custId;
+                string tid = new TransportUnitController().GetTransportUnitId();
+                lblTransportId.Text = tid;
             }
             catch (Exception)
             {
@@ -95,31 +120,7 @@ namespace e_shift.views
             }
         }
 
-        private void CustomerView_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-                
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+       
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
@@ -128,35 +129,37 @@ namespace e_shift.views
         /*Handle Submit Button click*/
         private void btnSubmit_onClick(object sender, EventArgs e)
         {
-            string firstName = txtFirstName.Text;
-            string lastName = txtLastName.Text;
-            string nic = txtNic.Text;
-            string address = txtAddress.Text;
-            string conactNumber = txtContactNumber.Text;
+
+            string vehicleType = ((ComboBoxItem) comboVehicleType.SelectedItem).Value;
+            string vehicleNo= txtVehicleNo.Text;
+            string model = txtModel.Text;
+            int capacity = (int) txtCapacity.Value;
+            string remark = txtRemark.Text;
+            
 
 
             try
             {
                 //Initialize dto with a builder
-                CustomerDto customerDto = CustomerDto.Builder()
-                        .WithFirstName(firstName).WithLastName(lastName)
-                        .WithNic(nic).WithAddress(address).WithContactNumber(conactNumber).Build();
+                TransportUnitDto transportUnitDto = TransportUnitDto.Builder()
+                        .WithCapacity(capacity).WithRemark(remark).WithModel(model)
+                        .WithRemark(vehicleType).WithVehicleNo(vehicleNo).build();
 
                 bool isSuccess;
 
                 if (!this._isUpdate) {
-                    isSuccess = new CustomerController().SaveCustomer(customerDto);
+                    isSuccess = new TransportUnitController().SaveTransportUnit(transportUnitDto);
                 } else {
-                    isSuccess = new CustomerController().UpdateCustomer(customerDto, lblCustId.Text);
+                    isSuccess = new TransportUnitController().UpdateTransportUnit(transportUnitDto, lblTransportId.Text);
                 }
 
                 //after submit 
                 if (isSuccess)
                 {
                     MessageBox.Show(string.Format(!this._isUpdate ? Constants.SUCCESSFULLY_CREATED
-                        : Constants.SUCCESSFULLY_UPDATED, Constants.CUSTOMER));
+                        : Constants.SUCCESSFULLY_UPDATED, Constants.TRANSPORT_UNIT));
 
-                    LoadCustomerData();
+                    LoadTransportUnitData();
                 }
                 else {
                     MessageBox.Show(Constants.SYSTEM_ERROR);
@@ -188,14 +191,14 @@ namespace e_shift.views
 
         /*Method to clear fields of the vie and load latestId*/
         private void ClearFields() {
-            txtFirstName.Text = "";
-            txtLastName.Text = "";
-            txtNic.Text = "";
-            txtAddress.Text = "";
-            txtContactNumber.Text = "";
+            comboVehicleType.Items.Clear();
+            txtVehicleNo.Text = "";
+            txtModel.Text = "";
+            txtRemark.Text = "";
+            txtCapacity.Text = "";
 
             //generae custId
-            SetCustomerID();
+            SetTransportId();
 
 
             ConductDefaultResets();
@@ -210,20 +213,12 @@ namespace e_shift.views
 
             //disable delete btn
             btnDelete.Enabled = false;
-            customerDataGridView.ClearSelection();
+            gridTransportUnit.ClearSelection();
 
             txtSearch.Text = "";
         }
 
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void customerDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+       
 
         private void On_Row_Click(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -236,28 +231,28 @@ namespace e_shift.views
             
 
 
-            int selectedRowCount = customerDataGridView
+            int selectedRowCount = gridTransportUnit
               .Rows.GetRowCount(DataGridViewElementStates.Selected);
 
             //grab the selected rows
             if (1 == selectedRowCount)
             {
                
-                string? custId = customerDataGridView.SelectedRows[0].Cells[0].Value.ToString();
-                string? firstName = customerDataGridView.SelectedRows[0].Cells[1].Value.ToString();
-                string? lastName = customerDataGridView.SelectedRows[0].Cells[2].Value.ToString();
-                string? nic = customerDataGridView.SelectedRows[0].Cells[3].Value.ToString();
-                string? address = customerDataGridView.SelectedRows[0].Cells[4].Value.ToString();
-                string? contactNumber = customerDataGridView.SelectedRows[0].Cells[5].Value.ToString();
+                string? custId = gridTransportUnit.SelectedRows[0].Cells[0].Value.ToString();
+                string? firstName = gridTransportUnit.SelectedRows[0].Cells[1].Value.ToString();
+                string? lastName = gridTransportUnit.SelectedRows[0].Cells[2].Value.ToString();
+                string? nic = gridTransportUnit.SelectedRows[0].Cells[3].Value.ToString();
+                string? address = gridTransportUnit.SelectedRows[0].Cells[4].Value.ToString();
+                string? contactNumber = gridTransportUnit.SelectedRows[0].Cells[5].Value.ToString();
 
 
-                txtFirstName.Text = firstName;
-                txtLastName.Text = lastName;
-                txtNic.Text = nic;
-                txtAddress.Text = address;
-                txtContactNumber.Text = contactNumber;
+                comboVehicleType.Text = firstName;
+                txtVehicleNo.Text = lastName;
+                txtModel.Text = nic;
+                txtRemark.Text = address;
+                txtCapacity.Text = contactNumber;
 
-                lblCustId.Text = custId;
+                lblTransportId.Text = custId;
             }
         }
 
@@ -265,20 +260,20 @@ namespace e_shift.views
         {
             try
             {
-                bool isSuccess = new CustomerController().DeleteCustomer(lblCustId.Text);
+                bool isSuccess = new CustomerController().DeleteCustomer(lblTransportId.Text);
 
 
                 if (isSuccess)
                 {
                     MessageBox.Show(string.Format(Constants.SUCCESSFULLY_DELETED, Constants.CUSTOMER));
-                    LoadCustomerData();
+                    LoadTransportUnitData();
                 }
                 else
                 {
                     MessageBox.Show(Constants.SYSTEM_ERROR);
                 }
 
-                LoadCustomerData();
+                LoadTransportUnitData();
             }
             catch (Exception)
             {
@@ -296,29 +291,10 @@ namespace e_shift.views
 
             DataTable dataTable = new CustomerController().SearchCustomers(type, text);
 
-            customerDataGridView.DataSource = dataTable;
+            gridTransportUnit.DataSource = dataTable;
 
             ChangeHeaderNames();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label6_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }  

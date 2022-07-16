@@ -11,7 +11,7 @@ namespace e_shift.dao
 {
     internal class CrudUtil
     {
-        private static SqlCommand SetSqlCommand(String sql, IDictionary<String, String> param) {
+        private static SqlCommand SetSqlCommand(String sql, IDictionary<String, object> param) {
 
             /*Get the singleton connection*/
             SqlConnection conn = DbConnection.GetInstance().GetConnection();
@@ -24,7 +24,7 @@ namespace e_shift.dao
             foreach (var val in param)
             {
                 String attribute = val.Key;
-                String value = val.Value;
+                object value = val.Value;
 
                 cmd.Parameters.AddWithValue(attribute, value);
             }
@@ -32,7 +32,7 @@ namespace e_shift.dao
 
         }
 
-        public static bool ExecuteUpdateDelete(String sql, IDictionary<String, String> param) {
+        public static bool ExecuteUpdateDelete(String sql, IDictionary<String, object> param) {
             bool result = SetSqlCommand(sql, param).ExecuteNonQuery() > 0;
 
             //close the connection of the connection object
@@ -41,28 +41,40 @@ namespace e_shift.dao
             return result;
         }
 
-        public static SqlDataReader ExecuteSelectQuery(String sql, IDictionary<String, String> param)
+        public static SqlDataReader ExecuteSelectQuery(String sql, IDictionary<String, object> param)
         {
-            var result = SetSqlCommand(sql, param).ExecuteReader();
-
-            //close the connection of the connection object
-            DbConnection.GetInstance().GetConnection().Close();
-
-            return result;
+            return SetSqlCommand(sql, param).ExecuteReader();
 
         }
 
         public static SqlDataReader ExecuteSelectQuery(String sql)
         {
             //initialize an empty directory as no params are parsed 
-            var emptyDirectory = new Dictionary<String, String>();
+            var emptyDirectory = new Dictionary<String, object>();
 
             var result = SetSqlCommand(sql, emptyDirectory).ExecuteReader();
 
             //close the connection of the connection object
             
-
             return result;
+        }
+
+        public static DataTable ExecuteSelectQueryForDataGrid(String sql)
+        {
+            //get the connection
+            var conn = DbConnection.GetInstance().GetConnection();
+
+            //initailize adaptr obj
+            SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
+
+            DataTable data = new DataTable();
+
+            //fill dataTable with adapter
+            sda.Fill(data);
+
+            conn.Close();
+
+            return data;
 
         }
     }

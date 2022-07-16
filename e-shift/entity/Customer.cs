@@ -14,16 +14,18 @@ namespace e_shift.entity
         private String lastName;
         private String nic;
         private String address;
+        private String contactNumber;
 
 
        
-        public Customer(string cid,string firstName, string lastName, string nic, string address)
+        public Customer(string cid,string firstName, string lastName, string nic, string address, string contactNumber)
         {
             this.cid = cid;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Nic = nic;
             this.Address = address;
+            this.ContactNumber = contactNumber;
         }
 
         
@@ -32,5 +34,6 @@ namespace e_shift.entity
         public string Nic { get => nic; set => nic = value; }
         public string Address { get => address; set => address = value; }
         public string Cid { get => cid; set => cid = value; }
+        public string ContactNumber { get => contactNumber; set => contactNumber = value; }
     }
 }

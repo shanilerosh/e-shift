@@ -11,9 +11,8 @@ namespace e_shift.controller
     internal class LoginController
     {
 
-        public void loginUser(UserDto userDto) {
-            MessageBox.Show("Hello World",userDto.Username);
-            MessageBox.Show("Hello World",userDto.Password);
+        public UserDto LoginUser(UserDto userDto) {
+            return new LoginBoImpl().Login(userDto);
           
         }
 

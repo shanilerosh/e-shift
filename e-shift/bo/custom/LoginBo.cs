@@ -9,6 +9,6 @@ namespace e_shift.bo.custom
 {
     internal interface LoginBo
     {
-        Boolean Login(UserDto userDto);
+        UserDto Login(UserDto userDto);
     }
 }
