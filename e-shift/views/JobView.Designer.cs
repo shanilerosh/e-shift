@@ -29,21 +29,25 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtItemName = new System.Windows.Forms.TextBox();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
-            this.gridItems = new System.Windows.Forms.DataGridView();
+            this.gridJob = new System.Windows.Forms.DataGridView();
             this.lblItemId = new System.Windows.Forms.Label();
             this.customerIdNameLabel = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.searchCombo = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtRemark = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.gridItems)).BeginInit();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtItemName = new System.Windows.Forms.TextBox();
+            this.txtRemark = new System.Windows.Forms.RichTextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.comboItem = new System.Windows.Forms.ComboBox();
+            this.btnAddItem = new System.Windows.Forms.Button();
+            this.txtQty = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.gridJob)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,36 +58,9 @@
             this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(10, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(293, 29);
+            this.label1.Size = new System.Drawing.Size(117, 29);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Item Unit Management";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(49, 112);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(63, 14);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Item Name";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(347, 108);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(51, 14);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Remarks";
-            // 
-            // txtItemName
-            // 
-            this.txtItemName.Location = new System.Drawing.Point(46, 131);
-            this.txtItemName.Name = "txtItemName";
-            this.txtItemName.Size = new System.Drawing.Size(179, 23);
-            this.txtItemName.TabIndex = 7;
+            this.label1.Text = "Create Job";
             // 
             // btnSubmit
             // 
@@ -92,9 +69,9 @@
             this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubmit.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnSubmit.ForeColor = System.Drawing.Color.White;
-            this.btnSubmit.Location = new System.Drawing.Point(486, 246);
+            this.btnSubmit.Location = new System.Drawing.Point(486, 226);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(85, 23);
+            this.btnSubmit.Size = new System.Drawing.Size(87, 23);
             this.btnSubmit.TabIndex = 9;
             this.btnSubmit.Text = "Create";
             this.btnSubmit.UseVisualStyleBackColor = false;
@@ -107,26 +84,26 @@
             this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReset.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnReset.ForeColor = System.Drawing.Color.White;
-            this.btnReset.Location = new System.Drawing.Point(48, 244);
+            this.btnReset.Location = new System.Drawing.Point(50, 224);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(75, 23);
+            this.btnReset.Size = new System.Drawing.Size(63, 25);
             this.btnReset.TabIndex = 10;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = false;
             this.btnReset.Click += new System.EventHandler(this.btnReset_onClick);
             // 
-            // gridItems
+            // gridJob
             // 
-            this.gridItems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridItems.Location = new System.Drawing.Point(46, 338);
-            this.gridItems.MultiSelect = false;
-            this.gridItems.Name = "gridItems";
-            this.gridItems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.gridItems.RowTemplate.Height = 25;
-            this.gridItems.Size = new System.Drawing.Size(654, 196);
-            this.gridItems.TabIndex = 11;
-            this.gridItems.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.On_Row_Click);
+            this.gridJob.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gridJob.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridJob.Location = new System.Drawing.Point(50, 338);
+            this.gridJob.MultiSelect = false;
+            this.gridJob.Name = "gridJob";
+            this.gridJob.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.gridJob.RowTemplate.Height = 25;
+            this.gridJob.Size = new System.Drawing.Size(606, 196);
+            this.gridJob.TabIndex = 11;
+            this.gridJob.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.On_Row_Click);
             // 
             // lblItemId
             // 
@@ -143,9 +120,9 @@
             this.customerIdNameLabel.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.customerIdNameLabel.Location = new System.Drawing.Point(445, 57);
             this.customerIdNameLabel.Name = "customerIdNameLabel";
-            this.customerIdNameLabel.Size = new System.Drawing.Size(115, 23);
+            this.customerIdNameLabel.Size = new System.Drawing.Size(66, 23);
             this.customerIdNameLabel.TabIndex = 13;
-            this.customerIdNameLabel.Text = "Item Unit ID :";
+            this.customerIdNameLabel.Text = "Job ID :";
             // 
             // btnDelete
             // 
@@ -154,31 +131,13 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(600, 244);
+            this.btnDelete.Location = new System.Drawing.Point(598, 226);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(80, 24);
+            this.btnDelete.Size = new System.Drawing.Size(82, 24);
             this.btnDelete.TabIndex = 14;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_click);
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(167, 309);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.PlaceholderText = "Type to search";
-            this.txtSearch.Size = new System.Drawing.Size(204, 23);
-            this.txtSearch.TabIndex = 15;
-            this.txtSearch.TextChanged += new System.EventHandler(this.txtsearch_Change);
-            // 
-            // searchCombo
-            // 
-            this.searchCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.searchCombo.FormattingEnabled = true;
-            this.searchCombo.Location = new System.Drawing.Point(50, 309);
-            this.searchCombo.Name = "searchCombo";
-            this.searchCombo.Size = new System.Drawing.Size(93, 23);
-            this.searchCombo.TabIndex = 16;
+            this.btnDelete.Click += new System.EventHandler(this.Btn_Delete_Click);
             // 
             // panel1
             // 
@@ -190,41 +149,120 @@
             this.panel1.Size = new System.Drawing.Size(1196, 55);
             this.panel1.TabIndex = 17;
             // 
-            // txtRemark
-            // 
-            this.txtRemark.Location = new System.Drawing.Point(347, 129);
-            this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(333, 87);
-            this.txtRemark.TabIndex = 18;
-            this.txtRemark.Text = "";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.SystemColors.Window;
             this.label6.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(203)))), ((int)(((byte)(135)))));
-            this.label6.Location = new System.Drawing.Point(46, 72);
+            this.label6.Location = new System.Drawing.Point(46, 262);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(83, 23);
             this.label6.TabIndex = 1;
             this.label6.Text = "Add Item";
             // 
-            // ItemView
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(49, 91);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(48, 14);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Location";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(347, 87);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(51, 14);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Remarks";
+            // 
+            // txtItemName
+            // 
+            this.txtItemName.Location = new System.Drawing.Point(46, 110);
+            this.txtItemName.Name = "txtItemName";
+            this.txtItemName.Size = new System.Drawing.Size(179, 23);
+            this.txtItemName.TabIndex = 7;
+            // 
+            // txtRemark
+            // 
+            this.txtRemark.Location = new System.Drawing.Point(347, 108);
+            this.txtRemark.Name = "txtRemark";
+            this.txtRemark.Size = new System.Drawing.Size(333, 87);
+            this.txtRemark.TabIndex = 18;
+            this.txtRemark.Text = "";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(50, 153);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(78, 14);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Required Date";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(48, 172);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 23);
+            this.dateTimePicker1.TabIndex = 21;
+            // 
+            // comboItem
+            // 
+            this.comboItem.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboItem.FormattingEnabled = true;
+            this.comboItem.Location = new System.Drawing.Point(50, 297);
+            this.comboItem.Name = "comboItem";
+            this.comboItem.Size = new System.Drawing.Size(262, 23);
+            this.comboItem.TabIndex = 22;
+            // 
+            // btnAddItem
+            // 
+            this.btnAddItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(130)))));
+            this.btnAddItem.FlatAppearance.BorderSize = 0;
+            this.btnAddItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddItem.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnAddItem.ForeColor = System.Drawing.Color.White;
+            this.btnAddItem.Location = new System.Drawing.Point(444, 297);
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(67, 23);
+            this.btnAddItem.TabIndex = 23;
+            this.btnAddItem.Text = "Add";
+            this.btnAddItem.UseVisualStyleBackColor = false;
+            this.btnAddItem.Click += new System.EventHandler(this.Btn_Add_Item);
+            // 
+            // txtQty
+            // 
+            this.txtQty.Location = new System.Drawing.Point(326, 297);
+            this.txtQty.Name = "txtQty";
+            this.txtQty.PlaceholderText = "Qty";
+            this.txtQty.Size = new System.Drawing.Size(88, 23);
+            this.txtQty.TabIndex = 24;
+            // 
+            // JobView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(719, 546);
+            this.Controls.Add(this.txtQty);
+            this.Controls.Add(this.btnAddItem);
+            this.Controls.Add(this.comboItem);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.txtRemark);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.searchCombo);
-            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.customerIdNameLabel);
             this.Controls.Add(this.lblItemId);
-            this.Controls.Add(this.gridItems);
+            this.Controls.Add(this.gridJob);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.txtItemName);
@@ -232,9 +270,9 @@
             this.Controls.Add(this.label4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
-            this.Name = "ItemView";
+            this.Name = "JobView";
             this.Text = "Item View";
-            ((System.ComponentModel.ISupportInitialize)(this.gridItems)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridJob)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -247,19 +285,23 @@
         #endregion
 
         private Label label1;
-        private Label label4;
-        private Label label5;
-        private TextBox txtItemName;
         private Button btnSubmit;
         private Button btnReset;
-        private DataGridView gridItems;
+        private DataGridView gridJob;
         private Label lblItemId;
         private Label customerIdNameLabel;
         private Button btnDelete;
-        private TextBox txtSearch;
-        private ComboBox searchCombo;
         private Panel panel1;
-        private RichTextBox txtRemark;
         private Label label6;
+        private Label label4;
+        private Label label5;
+        private TextBox txtItemName;
+        private RichTextBox txtRemark;
+        private Label label2;
+        private DateTimePicker dateTimePicker1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private ComboBox comboItem;
+        private Button btnAddItem;
+        private TextBox txtQty;
     }
 }

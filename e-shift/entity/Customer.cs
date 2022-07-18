@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace e_shift.entity
 {
-    internal class Customer
+    public class Customer
     {
 
         private String cid;

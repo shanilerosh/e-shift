@@ -1,7 +1,9 @@
 ﻿using e_shift.controller;
 using e_shift.dto;
+using e_shift.entity;
 using e_shift.utility;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,14 +17,15 @@ namespace e_shift.views
 {
     public partial class JobView : Form
     {
-        private bool _isUpdate = false;
+        private bool _isDelete = false;
+        private string _selectedItem;
 
-        public ItemView()
+        private BindingList<JobItemDto> _itemNameList = new BindingList<JobItemDto>();
+
+        public JobView(Customer customer)
         {
             InitializeComponent();
 
-            //load data to the grid
-            LoanItemData();
             //load latest id
             SetItemId();
             //default resets
@@ -48,11 +51,9 @@ namespace e_shift.views
 
 
 
-            searchCombo.Items.Add(itemName);
-            searchCombo.Items.Add(remark);
-            searchCombo.Items.Add(itemId);
-            
-            searchCombo.SelectedIndex = 0;
+            comboItem.Items.Add(itemName); 
+            comboItem.Items.Add(itemId); 
+            comboItem.Items.Add(remark); 
         }
 
 
@@ -64,7 +65,7 @@ namespace e_shift.views
             try
             {
                 //set values to the data grid
-                gridItems.DataSource = new ItemController().GetAllItems();
+                gridJob.DataSource = new ItemController().GetAllItems();
 
                 ChangeHeaderNames();
                 
@@ -78,9 +79,9 @@ namespace e_shift.views
 
         private void ChangeHeaderNames()
         {
-            gridItems.Columns[0].HeaderText = "Item ID";
-            gridItems.Columns[1].HeaderText = "Item Name";
-            gridItems.Columns[2].HeaderText = "Remark";
+            gridJob.Columns[0].HeaderText = "Item ID";
+            gridJob.Columns[1].HeaderText = "Item Name";
+            gridJob.Columns[2].HeaderText = "Remark";
         }
 
         public void SetItemId()
@@ -120,7 +121,7 @@ namespace e_shift.views
 
                 bool isSuccess;
 
-                if (!this._isUpdate) {
+                if (!this._isDelete) {
                     isSuccess = new ItemController().SaveItem(itemDto);
                 } else {
                     isSuccess = new ItemController().UpdateItem(itemDto, lblItemId.Text);
@@ -129,7 +130,7 @@ namespace e_shift.views
                 //after submit 
                 if (isSuccess)
                 {
-                    MessageBox.Show(string.Format(!this._isUpdate ? Constants.SUCCESSFULLY_CREATED
+                    MessageBox.Show(string.Format(!this._isDelete ? Constants.SUCCESSFULLY_CREATED
                         : Constants.SUCCESSFULLY_UPDATED, Constants.ITEM));
 
                     LoanItemData();
@@ -180,13 +181,12 @@ namespace e_shift.views
 
             //change button txt and flag
             btnSubmit.Text = "Create";
-            this._isUpdate = false;
+            this._isDelete = false;
 
             //disable delete btn
-            btnDelete.Enabled = false;
-            gridItems.ClearSelection();
+            btnDelete.Visible = false;
+            gridJob.ClearSelection();
 
-            txtSearch.Text = "";
         }
 
        
@@ -195,71 +195,93 @@ namespace e_shift.views
         {
 
             
-            btnSubmit.Text = "Update";
-            this._isUpdate = true;
+            btnAddItem.Visible = true;
+            this._isDelete = true;
 
-            btnDelete.Enabled = true;
             
 
-
-            int selectedRowCount = gridItems
+            int selectedRowCount = gridJob
               .Rows.GetRowCount(DataGridViewElementStates.Selected);
 
             //grab the selected rows
-            if (1 == selectedRowCount)
+            if (1 == selectedRowCount && null != gridJob.SelectedRows[0].Cells[0])
             {
-               
-                string? iid = gridItems.SelectedRows[0].Cells[0].Value.ToString();
-                string? itemName = gridItems.SelectedRows[0].Cells[1].Value.ToString();
-                string? remark = gridItems.SelectedRows[0].Cells[2].Value.ToString();
+                btnDelete.Visible = true;
+                this._selectedItem = gridJob.SelectedRows[0].Cells[0].Value.ToString();
 
-
-                txtItemName.Text = itemName;
-                txtRemark.Text = remark;
-
-                lblItemId.Text = iid;
             }
         }
 
-        private void btnDelete_click(object sender, EventArgs e)
+        /// <summary>
+        /// Read the existing array list and filter out the user selected object
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Btn_Delete_Click(object sender, EventArgs e)
+        {
+
+
+            List<JobItemDto> filteredList = _itemNameList
+                .Where(obj => !obj.ItemName.Equals(_selectedItem)).ToList();
+
+            this._itemNameList = new BindingList<JobItemDto>(filteredList);
+
+            gridJob.DataSource = _itemNameList;
+            gridJob.Refresh();
+
+        }
+
+        private void Btn_Add_Item(object sender, EventArgs e)
         {
             try
             {
-                bool isSuccess = new ItemController().DeleteItem(lblItemId.Text);
+                string itemName = comboItem.Text;
+                int qty = Int32.Parse(txtQty.Text);
 
+                var jobItemDto = JobItemDto.Builder()
+                    .WithQty(qty).WithItemName(itemName).Build();
 
-                if (isSuccess)
-                {
-                    MessageBox.Show(string.Format(Constants.SUCCESSFULLY_DELETED, Constants.ITEM));
-                    LoanItemData();
-                }
-                else
-                {
-                    MessageBox.Show(Constants.SYSTEM_ERROR);
-                }
+                AddItemToTheList(jobItemDto);
+            }
+            //If data is invalid
+            catch (InvalidDataException ex)
+            {
 
-                LoanItemData();
+                MessageBox.Show(ex.Message);
             }
             catch (Exception)
             {
 
                 MessageBox.Show(Constants.SYSTEM_ERROR);
+                this.ClearFields();
+            }
+        }
+
+        private void AddItemToTheList(JobItemDto jobItemDto) {
+
+
+            bool isExistFlag = false;
+
+
+            foreach (var obj in _itemNameList)
+            {
+                //if record already exist replace the qty
+                if (obj.ItemName.Equals(jobItemDto.ItemName))
+                {
+                    obj.Qty += jobItemDto.Qty;
+                    isExistFlag = true;
+                    break;
+                }
             }
 
-            this.ClearFields();
+            if (!isExistFlag) { 
+                _itemNameList.Add(jobItemDto);
+            }
+
+
+            //bind to the data source
+            gridJob.DataSource = _itemNameList;
+            gridJob.Refresh();
         }
-
-        private void txtsearch_Change(object sender, EventArgs e)
-        {
-            string text = txtSearch.Text;
-            string type = ((ComboBoxItem) searchCombo.SelectedItem).Value;
-
-            DataTable dataTable = new ItemController().SearchItem(type, text);
-
-            gridItems.DataSource = dataTable;
-
-            ChangeHeaderNames();
-        }
-
     }
 }  

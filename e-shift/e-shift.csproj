@@ -29,6 +29,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="views\JobView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="views\LoginView.cs">
       <SubType>Form</SubType>
     </Compile>

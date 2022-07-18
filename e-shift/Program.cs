@@ -1,4 +1,5 @@
 using e_shift.dto;
+using e_shift.entity;
 using e_shift.utility;
 using e_shift.views;
 
@@ -16,8 +17,8 @@ namespace e_shift
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            UserDto userDto = new UserDto(1, "Shanil", Role.ADMIN);
-            Application.Run(new ItemView());
+            Customer customer = new Customer("C-001", "sad", "dsad", "asd", "asd","sad");
+            Application.Run(new JobView(customer));
         }
     }
 }
