@@ -39,10 +39,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtItemName = new System.Windows.Forms.TextBox();
+            this.txtLocation = new System.Windows.Forms.TextBox();
             this.txtRemark = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.datePickerRequiredDate = new System.Windows.Forms.DateTimePicker();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.comboItem = new System.Windows.Forms.ComboBox();
             this.btnAddItem = new System.Windows.Forms.Button();
@@ -69,11 +69,11 @@
             this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubmit.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnSubmit.ForeColor = System.Drawing.Color.White;
-            this.btnSubmit.Location = new System.Drawing.Point(486, 226);
+            this.btnSubmit.Location = new System.Drawing.Point(552, 522);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(87, 23);
+            this.btnSubmit.Size = new System.Drawing.Size(155, 23);
             this.btnSubmit.TabIndex = 9;
-            this.btnSubmit.Text = "Create";
+            this.btnSubmit.Text = "Create Job";
             this.btnSubmit.UseVisualStyleBackColor = false;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_onClick);
             // 
@@ -96,12 +96,12 @@
             // 
             this.gridJob.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridJob.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridJob.Location = new System.Drawing.Point(50, 338);
+            this.gridJob.Location = new System.Drawing.Point(50, 339);
             this.gridJob.MultiSelect = false;
             this.gridJob.Name = "gridJob";
             this.gridJob.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.gridJob.RowTemplate.Height = 25;
-            this.gridJob.Size = new System.Drawing.Size(606, 196);
+            this.gridJob.Size = new System.Drawing.Size(657, 161);
             this.gridJob.TabIndex = 11;
             this.gridJob.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.On_Row_Click);
             // 
@@ -131,7 +131,7 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(598, 226);
+            this.btnDelete.Location = new System.Drawing.Point(540, 296);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(82, 24);
             this.btnDelete.TabIndex = 14;
@@ -181,12 +181,12 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Remarks";
             // 
-            // txtItemName
+            // txtLocation
             // 
-            this.txtItemName.Location = new System.Drawing.Point(46, 110);
-            this.txtItemName.Name = "txtItemName";
-            this.txtItemName.Size = new System.Drawing.Size(179, 23);
-            this.txtItemName.TabIndex = 7;
+            this.txtLocation.Location = new System.Drawing.Point(46, 110);
+            this.txtLocation.Name = "txtLocation";
+            this.txtLocation.Size = new System.Drawing.Size(179, 23);
+            this.txtLocation.TabIndex = 7;
             // 
             // txtRemark
             // 
@@ -206,12 +206,12 @@
             this.label2.TabIndex = 19;
             this.label2.Text = "Required Date";
             // 
-            // dateTimePicker1
+            // datePickerRequiredDate
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(48, 172);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 23);
-            this.dateTimePicker1.TabIndex = 21;
+            this.datePickerRequiredDate.Location = new System.Drawing.Point(48, 172);
+            this.datePickerRequiredDate.Name = "datePickerRequiredDate";
+            this.datePickerRequiredDate.Size = new System.Drawing.Size(200, 23);
+            this.datePickerRequiredDate.TabIndex = 21;
             // 
             // comboItem
             // 
@@ -254,7 +254,7 @@
             this.Controls.Add(this.txtQty);
             this.Controls.Add(this.btnAddItem);
             this.Controls.Add(this.comboItem);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.datePickerRequiredDate);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtRemark);
             this.Controls.Add(this.label6);
@@ -265,7 +265,7 @@
             this.Controls.Add(this.gridJob);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnSubmit);
-            this.Controls.Add(this.txtItemName);
+            this.Controls.Add(this.txtLocation);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -295,10 +295,10 @@
         private Label label6;
         private Label label4;
         private Label label5;
-        private TextBox txtItemName;
+        private TextBox txtLocation;
         private RichTextBox txtRemark;
         private Label label2;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker datePickerRequiredDate;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private ComboBox comboItem;
         private Button btnAddItem;

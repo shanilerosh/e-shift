@@ -27,7 +27,7 @@ namespace e_shift.views
             InitializeComponent();
 
             //load latest id
-            SetItemId();
+            SetJobId();
             //default resets
             ConductDefaultResets();
             //set values to search compbo
@@ -84,7 +84,10 @@ namespace e_shift.views
             gridJob.Columns[2].HeaderText = "Remark";
         }
 
-        public void SetItemId()
+        /// <summary>
+        /// Generate unique job id for each job creation
+        /// </summary>
+        public void SetJobId()
         {
             try
             {
@@ -109,8 +112,9 @@ namespace e_shift.views
         private void btnSubmit_onClick(object sender, EventArgs e)
         {
 
-            string itemName = txtItemName.Text;
+            string itemName = txtLocation.Text;
             string reamrk= txtRemark.Text;
+            DateTime date = datePickerRequiredDate.Value.Date;
 
             
             try
@@ -166,11 +170,11 @@ namespace e_shift.views
         /*Method to clear fields of the vie and load latestId*/
         private void ClearFields() {
             
-            txtItemName.Text = "";
+            txtLocation.Text = "";
             txtRemark.Text = "";
 
             //generae custId
-            SetItemId();
+            SetJobId();
 
 
             ConductDefaultResets();
