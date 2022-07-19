@@ -13,6 +13,7 @@ namespace e_shift.utility
         public static readonly string CUSTOMER = "Customer";
         public static readonly string ITEM = "Item";
         public static readonly string TRANSPORT_UNIT = "Transport Unit";
+        public static readonly string JOB = "Job";
 
         //System error
         public static readonly string SYSTEM_ERROR = 

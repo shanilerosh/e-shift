@@ -21,6 +21,17 @@ namespace e_shift.entity
         //list of individual items
         private BindingList<Item> _itemNameList;
 
+        public Job(string jobId, string location, DateTime requiredDate, string remarks, string custId, Status status, BindingList<Item> itemNameList)
+        {
+            _jobId = jobId;
+            _location = location;
+            _requiredDate = requiredDate;
+            _remarks = remarks;
+            _custId = custId;
+            _status = status;
+            _itemNameList = itemNameList;
+        }
+
         public string JobId { get => _jobId; set => _jobId = value; }
         public string Location { get => _location; set => _location = value; }
         public DateTime RequiredDate { get => _requiredDate; set => _requiredDate = value; }

@@ -28,7 +28,7 @@ namespace e_shift.dao.custom.impl
                 jobCommand.Parameters.AddWithValue("@jobId", job.JobId);
                 jobCommand.Parameters.AddWithValue("@jobLocation", job.Location);
                 jobCommand.Parameters.AddWithValue("@requiredDateTime", job.RequiredDate);
-                jobCommand.Parameters.AddWithValue("@custId", job.RequiredDate);
+                jobCommand.Parameters.AddWithValue("@custId", job.CustId);
                 jobCommand.Parameters.AddWithValue("@jobStatus", job.Status.ToString());
                 jobCommand.Parameters.AddWithValue("@remarks", job.Remarks);
                 
@@ -40,7 +40,7 @@ namespace e_shift.dao.custom.impl
                 foreach (var jobItem in job.ItemNameList)
                 {
                     var jobDetailsCommand = new
-                    SqlCommand("INSERT INTO db.jobDetails(jobId,iid,qty) Values (@jobId,@iid,@qty)", conn, transaction);
+                    SqlCommand("INSERT INTO db.jobDetail(jobId,iid,qty) Values (@jobId,@iid,@qty)", conn, transaction);
 
                     jobDetailsCommand.Parameters.AddWithValue("@jobId", job.JobId);
                     jobDetailsCommand.Parameters.AddWithValue("@iid", jobItem.Iid);

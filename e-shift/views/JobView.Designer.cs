@@ -32,7 +32,7 @@
             this.btnSubmit = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.gridJob = new System.Windows.Forms.DataGridView();
-            this.lblItemId = new System.Windows.Forms.Label();
+            this.lblJobId = new System.Windows.Forms.Label();
             this.customerIdNameLabel = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -107,12 +107,12 @@
             // 
             // lblItemId
             // 
-            this.lblItemId.AutoSize = true;
-            this.lblItemId.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblItemId.Location = new System.Drawing.Point(622, 57);
-            this.lblItemId.Name = "lblItemId";
-            this.lblItemId.Size = new System.Drawing.Size(0, 23);
-            this.lblItemId.TabIndex = 12;
+            this.lblJobId.AutoSize = true;
+            this.lblJobId.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblJobId.Location = new System.Drawing.Point(622, 57);
+            this.lblJobId.Name = "lblJobId";
+            this.lblJobId.Size = new System.Drawing.Size(0, 23);
+            this.lblJobId.TabIndex = 12;
             // 
             // customerIdNameLabel
             // 
@@ -261,7 +261,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.customerIdNameLabel);
-            this.Controls.Add(this.lblItemId);
+            this.Controls.Add(this.lblJobId);
             this.Controls.Add(this.gridJob);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnSubmit);
@@ -288,7 +288,7 @@
         private Button btnSubmit;
         private Button btnReset;
         private DataGridView gridJob;
-        private Label lblItemId;
+        private Label lblJobId;
         private Label customerIdNameLabel;
         private Button btnDelete;
         private Panel panel1;

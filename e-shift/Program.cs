@@ -17,7 +17,7 @@ namespace e_shift
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            Customer customer = new Customer("C-001", "sad", "dsad", "asd", "asd","sad");
+            Customer customer = new Customer("C001", "sad", "dsad", "asd", "asd","sad");
             Application.Run(new JobView(customer));
         }
     }

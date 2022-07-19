@@ -19,11 +19,14 @@ namespace e_shift.views
     {
         private bool _isDelete = false;
         private string _selectedItem;
+        private Customer _loggdUser;
 
         private BindingList<JobItemDto> _itemNameList = new BindingList<JobItemDto>();
 
         public JobView(Customer customer)
         {
+            _loggdUser = customer;
+            
             InitializeComponent();
 
             //load latest id
@@ -34,26 +37,28 @@ namespace e_shift.views
             SetValueToSearchCombo();
         }
 
-        public void SetValueToSearchCombo() {
+        private void SetValueToSearchCombo() {
 
 
-            ComboBoxItem itemName = new ComboBoxItem();
-            itemName.Text = "Item Name";
-            itemName.Value = "itemName";
+            try
+            {
+                var dataTable = new ItemController().GetAllItems();
 
-            ComboBoxItem itemId = new ComboBoxItem();
-            itemId.Text = "Item ID";
-            itemId.Value = "iid";
+                foreach (DataRow item in dataTable.Rows) {
+                    var comboItemType = new ComboBoxItem
+                    {
+                        Text = item["itemName"].ToString(),
+                        Value = item["iid"].ToString()
+                    };
 
-            ComboBoxItem remark = new ComboBoxItem();
-            remark.Text = "Remark";
-            remark.Value = "remark";
+                    comboItem.Items.Add(comboItemType);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(Constants.SYSTEM_ERROR);
+            }
 
-
-
-            comboItem.Items.Add(itemName); 
-            comboItem.Items.Add(itemId); 
-            comboItem.Items.Add(remark); 
         }
 
 
@@ -65,7 +70,7 @@ namespace e_shift.views
             try
             {
                 //set values to the data grid
-                gridJob.DataSource = new ItemController().GetAllItems();
+               // gridJob.DataSource = new ItemController().GetAllItems();
 
                 ChangeHeaderNames();
                 
@@ -84,16 +89,15 @@ namespace e_shift.views
             gridJob.Columns[2].HeaderText = "Remark";
         }
 
-        /// <summary>
-        /// Generate unique job id for each job creation
-        /// </summary>
-        public void SetJobId()
+        /**
+         * Retrieve a new job id from the database
+         */
+        private void SetJobId()
         {
             try
             {
-                //set values to the data grid
-                string tid = new ItemController().GetItemId();
-                lblItemId.Text = tid;
+
+                lblJobId.Text = new JobController().GetItemId();
             }
             catch (Exception)
             {
@@ -112,30 +116,27 @@ namespace e_shift.views
         private void btnSubmit_onClick(object sender, EventArgs e)
         {
 
-            string itemName = txtLocation.Text;
-            string reamrk= txtRemark.Text;
-            DateTime date = datePickerRequiredDate.Value.Date;
+            var location = txtLocation.Text;
+            var remark= txtRemark.Text;
+            var date = datePickerRequiredDate.Value.Date;
 
             
             try
             {
                 //Initialize dto with a builder
-                var itemDto = ItemDto.Builder().WithItemName(itemName)
-                    .WithRemark(reamrk).Build();
+                var jobDto = JobDto.Builder().WithRequiredDate(date)
+                    .WithCustId(_loggdUser.Cid)
+                    .WithJobId(lblJobId.Text)
+                    .WithRemark(remark).WithLocation(location).Build();
 
-                bool isSuccess;
+                jobDto.ItemNameList = this._itemNameList;
 
-                if (!this._isDelete) {
-                    isSuccess = new ItemController().SaveItem(itemDto);
-                } else {
-                    isSuccess = new ItemController().UpdateItem(itemDto, lblItemId.Text);
-                }
+                bool isSuccess = new JobController().CreateJob(jobDto);
 
                 //after submit 
                 if (isSuccess)
                 {
-                    MessageBox.Show(string.Format(!this._isDelete ? Constants.SUCCESSFULLY_CREATED
-                        : Constants.SUCCESSFULLY_UPDATED, Constants.ITEM));
+                    MessageBox.Show(string.Format(Constants.SUCCESSFULLY_CREATED, Constants.JOB));
 
                     LoanItemData();
                 }
@@ -175,8 +176,7 @@ namespace e_shift.views
 
             //generae custId
             SetJobId();
-
-
+            
             ConductDefaultResets();
 
         }
@@ -239,13 +239,17 @@ namespace e_shift.views
         {
             try
             {
-                string itemName = comboItem.Text;
-                int qty = Int32.Parse(txtQty.Text);
+                var itemName = comboItem.Text;
+                var qty = int.Parse(txtQty.Text);
 
                 var jobItemDto = JobItemDto.Builder()
                     .WithQty(qty).WithItemName(itemName).Build();
 
                 AddItemToTheList(jobItemDto);
+                
+                //clear items selected
+                comboItem.Refresh();
+                txtQty.Text = "";
             }
             //If data is invalid
             catch (InvalidDataException ex)

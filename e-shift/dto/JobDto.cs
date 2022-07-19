@@ -25,6 +25,7 @@ namespace e_shift.dto
         public DateTime RequiredDate { get => _requiredDate; set => _requiredDate = value; }
         public string Remarks { get => _remarks; set => _remarks = value; }
         internal BindingList<JobItemDto> ItemNameList { get => _itemNameList; set => _itemNameList = value; }
+        public string CustId { get => _custId; set => _custId = value; }
 
         public static JobDto Builder()
         {
@@ -35,6 +36,20 @@ namespace e_shift.dto
         {
             Assert.HasText(name, "Location Cannot be empty");
             this.Location = name;
+            return this;
+        }
+        
+        public JobDto WithJobId(string name)
+        {
+            Assert.HasText(name, "Job Id cannot be null");
+            this.JobId = name;
+            return this;
+        }
+
+        public JobDto WithCustId(string name)
+        {
+            Assert.HasText(name, "Customer Id cannot be empty");
+            this.CustId = name;
             return this;
         }
 

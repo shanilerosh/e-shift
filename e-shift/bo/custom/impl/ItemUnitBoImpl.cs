@@ -18,6 +18,13 @@ namespace e_shift.bo.custom.impl
 
         public bool AddItem(ItemDto item)
         {
+            var itemByName = dao.GetItemByName(item.ItemName);
+
+            if (null != itemByName)
+            {
+                throw new InvalidDataException("Item name cannot be duplicated. Please change item name "+item.ItemName);
+            }
+            
             return dao
                 .Add(new Item(GetItemId(), item.Remark, item.ItemName));
         }
@@ -35,6 +42,11 @@ namespace e_shift.bo.custom.impl
         public DataTable GetItem(string atr, string search)
         {
             return dao.SearchItem(atr, search);
+        }
+
+        public ItemDto GetItemByName(string itemName)
+        {
+            throw new NotImplementedException();
         }
 
         public string GetItemId()
