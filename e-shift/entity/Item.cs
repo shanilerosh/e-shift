@@ -13,6 +13,9 @@ namespace e_shift.entity
         private String _remark;
         private String _itemName;
 
+        //for keeping item qty
+        private int qty;
+
         public Item(string iid, string remark, string itemName)
         {
             _iid = iid;
@@ -23,5 +26,6 @@ namespace e_shift.entity
         public string Iid { get => _iid; set => _iid = value; }
         public string Remark { get => _remark; set => _remark = value; }
         public string ItemName { get => _itemName; set => _itemName = value; }
+        public int Qty { get => qty; set => qty = value; }
     }
 }

@@ -34,6 +34,7 @@ namespace e_shift.dto
             return new ItemDto();
         }
 
+
         public ItemDto WithItemName(string name) {
            Assert.HasText(name, "Item Name cannot be empty");
            this.ItemName = name;

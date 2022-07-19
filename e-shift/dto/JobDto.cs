@@ -15,6 +15,7 @@ namespace e_shift.dto
         private string _location;
         private DateTime _requiredDate;
         private string _remarks;
+        private string _custId;
 
         //list of individual items
         private BindingList<JobItemDto> _itemNameList;
@@ -23,40 +24,35 @@ namespace e_shift.dto
         public string Location { get => _location; set => _location = value; }
         public DateTime RequiredDate { get => _requiredDate; set => _requiredDate = value; }
         public string Remarks { get => _remarks; set => _remarks = value; }
+        internal BindingList<JobItemDto> ItemNameList { get => _itemNameList; set => _itemNameList = value; }
 
-        public static Job Builder()
+        public static JobDto Builder()
         {
-            return new Job();
+            return new JobDto();
         }
 
-        public Job WithLocation(string name)
+        public JobDto WithLocation(string name)
         {
             Assert.HasText(name, "Location Cannot be empty");
             this.Location = name;
             return this;
         }
 
-        public Job WithRemark(string name)
+        public JobDto WithRemark(string name)
         {
             this.Remarks = null == name ? "" : name;
             return this;
         }
 
-        public Job WithRequiredDate(DateTime name)
+        public JobDto WithRequiredDate(DateTime name)
         {
             Assert.IsNull(name, "Required Date Cannot be empty");
             this.RequiredDate = name;
             return this;
         }
 
-        public JobItemDto WithQty(int qty)
-        {
-            Assert.HasNumber(qty, "Qty Cannot be empty");
-            this.Qty = qty;
-            return this;
-        }
 
-        public JobItemDto Build()
+        public JobDto Build()
         {
             return this;
         }

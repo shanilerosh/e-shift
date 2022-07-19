@@ -21,5 +21,7 @@ namespace e_shift.bo.custom
         DataTable GetItem(string atr, string search);
 
         String GetItemId();
+
+        ItemDto GetItemByName(string itemName);
     }
 }

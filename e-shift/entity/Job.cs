@@ -15,6 +15,8 @@ namespace e_shift.entity
         private string _location;
         private DateTime _requiredDate;
         private string _remarks;
+        private string _custId;
+        private Status _status;
 
         //list of individual items
         private BindingList<Item> _itemNameList;
@@ -23,5 +25,8 @@ namespace e_shift.entity
         public string Location { get => _location; set => _location = value; }
         public DateTime RequiredDate { get => _requiredDate; set => _requiredDate = value; }
         public string Remarks { get => _remarks; set => _remarks = value; }
+        public string CustId { get => _custId; set => _custId = value; }
+        public Status Status { get => _status; set => _status = value; }
         internal BindingList<Item> ItemNameList { get => _itemNameList; set => _itemNameList = value; }
     }
+}

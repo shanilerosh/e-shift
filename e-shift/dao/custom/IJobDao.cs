@@ -13,6 +13,6 @@ namespace e_shift.dao.custom
     {
         String GetJobID();
 
-        bool CreateJob();
+        bool CreateJob(Job job);
     }
 }

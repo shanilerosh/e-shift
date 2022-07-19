@@ -14,5 +14,7 @@ namespace e_shift.dao.custom
         String GetItemId();
 
         DataTable SearchItem(string field, string val);
+
+        Item GetItemByName(string name);    
     }
 }

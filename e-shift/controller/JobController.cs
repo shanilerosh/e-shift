@@ -13,7 +13,7 @@ namespace e_shift.controller
     internal class JobController
     {
         
-        public bool CreateJob(JobDto job) {
+        public bool CreateJob(Job job) {
             return new ItemUnitBoImpl().AddItem(item);
         }
 

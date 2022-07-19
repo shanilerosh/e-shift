@@ -16,5 +16,7 @@ namespace e_shift.dao.custom
         DataTable SearchCustomers(string field, string val);
 
         bool CreateUserAndCustomerTransaction(Customer customer, User user);
+
+        Customer findByCustId(string custId);
     }
 }

@@ -12,6 +12,8 @@ namespace e_shift.bo.custom
     internal interface IJobBo
     {
 
-        bool AddJob(Job job);
+        bool AddJob(JobDto job);
+
+        string GetJobId();
     }
 }

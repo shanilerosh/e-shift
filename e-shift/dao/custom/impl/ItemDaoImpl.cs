@@ -48,6 +48,32 @@ namespace e_shift.dao.custom.impl
             return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT * FROM db.item");
         }
 
+        public Item GetItemByName(string name)
+        {
+            try
+            {
+                using (SqlDataReader sqlDataReader = CrudUtil
+                   .ExecuteSelectQuery("SELECT TOP 1 * FROM db.item WHERE itemName = '" + name + "'"))
+                {
+                    if (sqlDataReader.HasRows)
+                    {
+
+                        while (sqlDataReader.Read())
+                        {
+                            return new Item(sqlDataReader.GetString(0),
+                                sqlDataReader.GetString(2), sqlDataReader.GetString(1));
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                DbConnection.GetInstance().GetConnection().Close();
+            }
+
+            return null;
+        }
+
         public string GetItemId()
         {
             try
