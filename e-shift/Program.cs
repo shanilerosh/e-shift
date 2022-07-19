@@ -17,8 +17,12 @@ namespace e_shift
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            Customer customer = new Customer("C001", "sad", "dsad", "asd", "asd","sad");
-            Application.Run(new LoginView());
+            var customerDto = new CustomerDto();
+            customerDto.Cid = "C001";
+            
+            Application.Run(new JobContainer(customerDto));
+            //Application.Run(new JobView(customerDto));
+           // Application.Run(new LoginView());
         }
     }
 }
