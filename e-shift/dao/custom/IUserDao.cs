@@ -19,5 +19,6 @@ namespace e_shift.dao.custom
         bool CreateNewUser(User user);
 
         User CheckWithUserNameAndGetUserObj(string username);
+        
     }
 }

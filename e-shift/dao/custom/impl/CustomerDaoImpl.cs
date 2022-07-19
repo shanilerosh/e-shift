@@ -114,6 +114,37 @@ namespace e_shift.dao.custom.impl
             return null;
         }
 
+        public Customer findByUserId(int userId)
+        {
+            try
+            {
+                using (SqlDataReader sqlDataReader = CrudUtil
+                           .ExecuteSelectQuery("SELECT TOP 1 * FROM db.customer WHERE uid = '"+userId+"'"))
+                {
+                    //.ExecuteSelectQuery("SELECT * FROM db.customer")) {
+                    if (sqlDataReader.HasRows)
+                    {
+
+                        while (sqlDataReader.Read())
+                        {
+                            
+                            return new Customer(sqlDataReader.GetString(0),
+                                sqlDataReader.GetString(1), sqlDataReader.GetString(2),
+                                sqlDataReader.GetString(3), sqlDataReader.GetString(4),
+                                sqlDataReader.GetString(5));
+                            
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                DbConnection.GetInstance().GetConnection().Close();
+            }
+
+            return null;
+        }
+
         public DataTable GetAll()
         {
             return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT * FROM db.customer");

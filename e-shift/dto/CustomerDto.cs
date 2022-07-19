@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace e_shift.dto
 {
-    internal class CustomerDto
+    public class CustomerDto
     {
+        private String _cid;
         private String _firstName;
         private String _lastName;
         private String _nic;
@@ -24,6 +25,7 @@ namespace e_shift.dto
         public string ContactNumber { get => _contactNumber; set => _contactNumber = value; }
         public string UserName { get => _userName; set => _userName = value; }
         public string Password { get => _password; set => _password = value; }
+        public string Cid { get => _cid; set => _cid = value; }
 
 
 
@@ -36,6 +38,12 @@ namespace e_shift.dto
         public CustomerDto WithFirstName(string name) {
             Assert.HasText(name, "First Name cannot be empty");
           this.FirstName = name;
+            return this;
+        }
+        
+        public CustomerDto WithCId(string name) {
+            Assert.HasText(name, "CId Cannot be null");
+            this.Cid = name;
             return this;
         }
 

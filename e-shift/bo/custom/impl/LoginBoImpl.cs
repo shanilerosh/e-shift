@@ -35,7 +35,7 @@ namespace e_shift.bo.custom.impl
             }
 
 
-            return UserDto.Builder().WithUserName(user.Username).WithRole(user.Role).WithUid(userDto.Uid).Build();
+            return UserDto.Builder().WithUserName(user.Username).WithRole(user.Role).WithUid(user.Uid).Build();
         }
     }
 }

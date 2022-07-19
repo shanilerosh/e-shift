@@ -18,5 +18,6 @@ namespace e_shift.dao.custom
         bool CreateUserAndCustomerTransaction(Customer customer, User user);
 
         Customer findByCustId(string custId);
+        Customer findByUserId(int userId);
     }
 }

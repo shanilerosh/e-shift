@@ -35,13 +35,14 @@ namespace e_shift.views
 
                 UserDto loggedUser = new LoginController().LoginUser(userDto
                     ,radioAdmin.Checked);
-
+                
+                //user dto found from the db
                 if (null != loggedUser)
                 {
                     MessageBox.Show(string.Format(Constants.SUCCESSFULLY_LOGGED_IN, username));
 
-                    MainPanelView panl = new MainPanelView(userDto);
-                    panl.Show();
+                    MainPanelView panel = new MainPanelView(loggedUser);
+                    panel.Show();
                     Hide();
 
                 }

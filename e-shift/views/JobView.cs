@@ -19,11 +19,11 @@ namespace e_shift.views
     {
         private bool _isDelete = false;
         private string _selectedItem;
-        private Customer _loggdUser;
+        private CustomerDto _loggdUser;
 
         private BindingList<JobItemDto> _itemNameList = new BindingList<JobItemDto>();
 
-        public JobView(Customer customer)
+        public JobView(CustomerDto customer)
         {
             _loggdUser = customer;
             

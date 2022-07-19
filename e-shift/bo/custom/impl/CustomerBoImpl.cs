@@ -87,5 +87,20 @@ namespace e_shift.bo.custom.impl
 
             return custId;
         }
+
+        public CustomerDto findByUserId(int userId)
+        {
+            //find the customer entity
+            var customer = dao.findByUserId(userId);
+
+            if (null == customer)
+            {
+                throw new InvalidDataException("Customer Not Found with the id "+customer.Uid);
+            }
+            
+            //convert customer entity to dto
+            return CustomerDto.Builder().WithFirstName(customer.FirstName)
+                .WithCId(customer.Cid).Build();
+        }
     }
 }

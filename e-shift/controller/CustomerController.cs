@@ -41,6 +41,11 @@ namespace e_shift.controller
         {
             return new CustomerBoImpl().SearchCustomers(atr,search);
         }
+        
+        public CustomerDto findCustomerByUserId(int uuid)
+        {
+            return new CustomerBoImpl().findByUserId(uuid);
+        }
 
 
     }

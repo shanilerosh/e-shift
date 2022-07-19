@@ -21,5 +21,7 @@ namespace e_shift.bo.custom
         DataTable SearchCustomers(string atr, string search);
 
         String GetCustomerId();
+
+        CustomerDto findByUserId(int userId);
     }
 }

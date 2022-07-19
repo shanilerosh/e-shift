@@ -9,12 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using e_shift.controller;
 
 namespace e_shift.views
 {
     public partial class MainPanelView : Form
     {
         private UserDto _userDetail;
+        private CustomerDto _customer;
         
         public MainPanelView(UserDto userDto)
         {
@@ -26,7 +28,24 @@ namespace e_shift.views
 
         private void SetUserData()
         {
-            lblUser.Text = this._userDetail.Username;
+            try
+            {
+                if (_userDetail.Role == Role.CUSTOMER)
+                {
+                    _customer = new CustomerController()
+                        .findCustomerByUserId(_userDetail.Uid);
+                }
+            }
+            catch (InvalidDataException ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show(Constants.SYSTEM_ERROR);
+            }
         }
 
         private void SetPriviladges()
@@ -58,6 +77,20 @@ namespace e_shift.views
         private void btnOrder_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void panelMain_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Btn_Main_Job_Click_Handle(object sender, EventArgs e)
+        {
+            JobView jobView = new JobView(_customer);
+            jobView.TopLevel = false;
+            panelMain.Controls.Add(jobView);
+            jobView.BringToFront();
+            jobView.Show();
         }
     }
 

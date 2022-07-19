@@ -28,7 +28,7 @@ namespace e_shift.utility
         public static readonly string SUCCESSFULLY_UPDATED =
             "{0} Successfully Updated";
         public static readonly string SUCCESSFULLY_LOGGED_IN =
-            "User {0} Successfully Created";
+            "User {0} Successfully Logged In";
 
 
 
