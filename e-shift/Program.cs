@@ -18,7 +18,7 @@ namespace e_shift
             ApplicationConfiguration.Initialize();
 
             Customer customer = new Customer("C001", "sad", "dsad", "asd", "asd","sad");
-            Application.Run(new JobView(customer));
+            Application.Run(new LoginView());
         }
     }
 }

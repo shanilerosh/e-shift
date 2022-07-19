@@ -75,6 +75,8 @@ namespace e_shift.views
                 if (isSuccess)
                 {
                     MessageBox.Show(string.Format(Constants.SUCCESSFULLY_CREATED, Constants.CUSTOMER));
+                    //if success navigate to login
+                    ShowLogin();
                 }
                 else {
                     MessageBox.Show(Constants.SYSTEM_ERROR);
@@ -112,11 +114,26 @@ namespace e_shift.views
             txtAddress.Text = "";
             txtContactNumber.Text = "";
 
+            txtUserName.Text = "";
+            txtPassword.Text = "";
+
             //generae custId
             SetCustomerID();
 
 
         }
 
+        private void Btn_Back_To_Login_Handle(object sender, EventArgs e)
+        {
+            ShowLogin();
+        }
+
+
+        private void ShowLogin() {
+            var loginView = new LoginView();
+            loginView.Show();
+
+            this.Hide();
+        }
     }
 }  

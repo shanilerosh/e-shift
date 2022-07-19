@@ -51,14 +51,14 @@ namespace e_shift.bo.custom.impl
 
         public string GetJobId()
         {
-            String jobId = dao.GetJobID();
+            var jobId = dao.GetJobID();
             if (jobId != null)
             {
-                String[] temp = jobId.Split("J");
-                int tempNumber = int.Parse(temp[1]);
+                var temp = jobId.Split("J");
+                var tempNumber = int.Parse(temp[1]);
                 tempNumber++;
 
-                if (tempNumber < 10)
+                if  (tempNumber < 10)
                 {
                     jobId = "J00" + tempNumber;
                 }

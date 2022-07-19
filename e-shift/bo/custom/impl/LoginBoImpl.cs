@@ -7,21 +7,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using e_shift.dao.custom;
 
 namespace e_shift.bo.custom.impl
 {
     internal class LoginBoImpl : LoginBo
     {
+
+        private IUserDao dao = new UserDaoImpl();
         public UserDto Login(UserDto userDto, bool isAdmin)
         {
             //check if an user exist with the username
-            bool ifUserNameExist = new UserDaoImpl().CheckWithUserName(userDto.Username);
+            bool ifUserNameExist = dao.CheckWithUserName(userDto.Username);
 
             Assert.IsTrue(ifUserNameExist, "No user exist with the username " + userDto.Username);
 
             //chech if username and password if correct
 
-            User? user = new UserDaoImpl().CheckWithUserNameAndPass(userDto.Username, userDto.Password);
+            User? user = dao.CheckWithUserNameAndPass(userDto.Username, userDto.Password);
 
             Assert.IsNull(user, "Invalid credentials for the user "+userDto.Username);
 

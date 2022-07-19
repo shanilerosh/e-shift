@@ -61,27 +61,6 @@ namespace e_shift.views
 
         }
 
-
-
-
-
-        //Get the values from the controller and set to the datagrid
-        public void LoanItemData() {
-            try
-            {
-                //set values to the data grid
-               // gridJob.DataSource = new ItemController().GetAllItems();
-
-                ChangeHeaderNames();
-                
-            }
-            catch (Exception)
-            {
-
-                MessageBox.Show(Constants.SYSTEM_ERROR);
-            }
-        }
-
         private void ChangeHeaderNames()
         {
             gridJob.Columns[0].HeaderText = "Item ID";
@@ -97,7 +76,7 @@ namespace e_shift.views
             try
             {
 
-                lblJobId.Text = new JobController().GetItemId();
+                lblJobId.Text = new JobController().GetJobId();
             }
             catch (Exception)
             {
@@ -137,8 +116,6 @@ namespace e_shift.views
                 if (isSuccess)
                 {
                     MessageBox.Show(string.Format(Constants.SUCCESSFULLY_CREATED, Constants.JOB));
-
-                    LoanItemData();
                 }
                 else {
                     MessageBox.Show(Constants.SYSTEM_ERROR);
@@ -166,6 +143,7 @@ namespace e_shift.views
         {
 
             this.ClearFields();
+            
         }
 
         /*Method to clear fields of the vie and load latestId*/
@@ -178,7 +156,14 @@ namespace e_shift.views
             SetJobId();
             
             ConductDefaultResets();
+            
+            //clear the recording in the table
+            ClearItemList();
+        }
 
+        private void ClearItemList()
+        {
+            _itemNameList.Clear();
         }
 
         private void ConductDefaultResets() {
@@ -248,7 +233,6 @@ namespace e_shift.views
                 AddItemToTheList(jobItemDto);
                 
                 //clear items selected
-                comboItem.Refresh();
                 txtQty.Text = "";
             }
             //If data is invalid

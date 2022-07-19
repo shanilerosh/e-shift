@@ -18,9 +18,9 @@ namespace e_shift.controller
         }
 
 
-        public string GetItemId()
+        public string GetJobId()
         {
-            return new ItemUnitBoImpl().GetItemId();
+            return new JobBoImpl().GetJobId();
         }
 
 

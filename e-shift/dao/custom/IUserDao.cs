@@ -9,11 +9,8 @@ using System.Threading.Tasks;
 
 namespace e_shift.dao.custom
 {
-    internal interface IUserDao : CrudDao<User, int>
+    internal interface IUserDao 
     {
-
-        DataTable SearchUser(string field, string val);
-
 
         bool CheckWithUserName(string userName);    
 

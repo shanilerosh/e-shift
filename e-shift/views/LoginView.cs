@@ -23,7 +23,7 @@ namespace e_shift.views
 
 
         /*Handle Submit Button click*/
-        private void btnSubmit_onClick(object sender, EventArgs e)
+        private void BtnSubmit_onClick(object sender, EventArgs e)
         {
             string username = txtUserName.Text;
             string password = txtPassword.Text;
@@ -77,45 +77,37 @@ namespace e_shift.views
         {
 
             btnCreate.Hide();
+            lblCreate.Hide();
+
+            radioAdmin.Checked = true;
+            radioCustomer.Checked = false;
 
         }
 
 
-        private void customerDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        
+
+        private void Handle_customer_radio_chanel(object sender, EventArgs e)
         {
-
-        }
-
-        private void LoginView_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void handle_customer_radio_chane(object sender, EventArgs e)
-        {
-            if (radioCustomer.Checked) {
+            if (radioCustomer.Checked)
+            {
                 btnCreate.Show();
+                lblCreate.Show();
+            }
+            else {
+                ConductDefaultResets();
             }
         }
 
-        private void Hanlde_radio_admin_change(object sender, EventArgs e)
+        private void Btn_Reset_Click(object sender, EventArgs e)
         {
-            if (radioAdmin.Checked) { 
-                btnCreate.Hide();
-            }
+            txtPassword.Text = "";
+            txtUserName.Text = "";
+
+            ConductDefaultResets();
         }
 
-        private void btnCreate_Click(object sender, EventArgs e)
+        private void Btn_Create_Account_Click(object sender, EventArgs e)
         {
             CustomerView customerView = new CustomerView();
             customerView.Show();
