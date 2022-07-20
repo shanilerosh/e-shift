@@ -23,6 +23,12 @@ namespace e_shift.entity
             _itemName = itemName;
         }
 
+        public Item(string itemName, int qty)
+        {
+            _itemName = itemName;
+            this.qty = qty;
+        }
+
         public string Iid { get => _iid; set => _iid = value; }
         public string Remark { get => _remark; set => _remark = value; }
         public string ItemName { get => _itemName; set => _itemName = value; }

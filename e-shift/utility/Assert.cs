@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using e_shift.dto;
 
 namespace e_shift.utility
 {
@@ -26,6 +28,14 @@ namespace e_shift.utility
         public static void IsNull(Object obj, String message)
         {
             if (null == obj)
+            {
+                throw new InvalidDataException(message);
+            }
+        }
+        
+        public static void IsEmptyCollection(IList<JobItemDto> collection, string message)
+        {
+            if (0 == collection.Count)
             {
                 throw new InvalidDataException(message);
             }

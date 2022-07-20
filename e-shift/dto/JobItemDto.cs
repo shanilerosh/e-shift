@@ -35,10 +35,10 @@ namespace e_shift.dto
             return this;
         }
 
-        public JobItemDto WithQty(int qty)
+        public JobItemDto WithQty(string qty)
         {
-            Assert.HasNumber(qty, "Qty Cannot be empty");
-            this.Qty = qty;
+            Assert.IsNull(qty, "Qty Cannot be empty");
+            this.Qty = int.Parse(qty);
             return this;
         }
 

@@ -58,6 +58,7 @@
             this.button4.TabIndex = 3;
             this.button4.Text = "Completed Job";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Completed_Job_Click_Handle);
             // 
             // button3
             // 
@@ -67,7 +68,7 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "Declined Jobs";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.Declined_Job_Click_Handle);
             // 
             // button2
             // 
@@ -77,7 +78,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "Pending Jobs";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Pending_Button_Click_Handle);
             // 
             // button1
             // 

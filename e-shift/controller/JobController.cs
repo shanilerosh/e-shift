@@ -12,17 +12,42 @@ namespace e_shift.controller
 {
     internal class JobController
     {
+        private IJobBo bo = new JobBoImpl();
         
         public bool CreateJob(JobDto job) {
-            return new JobBoImpl().AddJob(job);
+            return bo.AddJob(job);
         }
 
 
         public string GetJobId()
         {
-            return new JobBoImpl().GetJobId();
+            return bo.GetJobId();
         }
 
 
+        public DataTable FetchPendingJobData(string cid)
+        {
+            return bo.FetchPendingJobData(cid);
+        }
+        
+        public DataTable FetchDeclinedJobData(string cid)
+        {
+            return bo.FetchDeclinedJobData(cid);
+        }
+        
+        public DataTable FetchAcceptedJobData(string cid)
+        {
+            return bo.FetchAcceptedJobData(cid);
+        }
+        
+        public JobDto FetchJobDataWithItemsById(string jobId)
+        {
+            return bo.FetchJobDtoByJobId(jobId);
+        }
+        
+        public bool UpdateJob(JobDto jobDto, string jobId)
+        {
+            return bo.UpdateJob(jobDto, jobId);
+        }
     }
 }

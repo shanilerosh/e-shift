@@ -15,5 +15,12 @@ namespace e_shift.bo.custom
         bool AddJob(JobDto job);
 
         string GetJobId();
+        
+        DataTable FetchPendingJobData(string cid);
+        
+        JobDto FetchJobDtoByJobId(string cid);
+        bool UpdateJob(JobDto jobDto, string jobId);
+        DataTable FetchDeclinedJobData(string cid);
+        DataTable FetchAcceptedJobData(string cid);
     }
 }

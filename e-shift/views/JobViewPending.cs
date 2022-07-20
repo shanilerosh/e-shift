@@ -15,26 +15,49 @@ using System.Windows.Forms;
 
 namespace e_shift.views
 {
-    public partial class JobView : Form
+    public partial class JobViewPending : Form
     {
         private bool _isDelete = false;
+        private string _selectedJob;
         private string _selectedItem;
         private CustomerDto _loggdUser;
 
-        private BindingList<JobItemDto> _itemNameList = new BindingList<JobItemDto>();
+        private BindingList<JobItemDto> _itemNameList;
 
-        public JobView(CustomerDto customer)
+        public JobViewPending(CustomerDto customer)
         {
             _loggdUser = customer;
             
             InitializeComponent();
 
-            //load latest id
-            SetJobId();
+            //get pending data to table
+            FetchPendingData();
             //default resets
             ConductDefaultResets();
             //set values to search compbo
             SetValueToSearchCombo();
+        }
+
+        /**
+         * Fetch Pending Job Data and set to the pending grid
+         */
+        private void FetchPendingData()
+        {
+            try
+            {
+                var dt =new JobController().FetchPendingJobData(_loggdUser.Cid);
+                gridPending.DataSource = dt;
+            }
+            catch (InvalidDataException ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show(Constants.SYSTEM_ERROR);
+            }
         }
 
         private void SetValueToSearchCombo() {
@@ -63,27 +86,12 @@ namespace e_shift.views
 
         private void ChangeHeaderNames()
         {
-            gridJob.Columns[0].HeaderText = "Item ID";
-            gridJob.Columns[1].HeaderText = "Item Name";
-            gridJob.Columns[2].HeaderText = "Remark";
+            itemsGrid.Columns[0].HeaderText = "Item ID";
+            itemsGrid.Columns[1].HeaderText = "Item Name";
+            itemsGrid.Columns[2].HeaderText = "Remark";
         }
 
-        /**
-         * Retrieve a new job id from the database
-         */
-        private void SetJobId()
-        {
-            try
-            {
-
-                lblJobId.Text = new JobController().GetJobId();
-            }
-            catch (Exception)
-            {
-
-                MessageBox.Show(Constants.SYSTEM_ERROR);
-            }
-        }
+        
 
        
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -111,20 +119,20 @@ namespace e_shift.views
                     .WithJobId(lblJobId.Text)
                     .WithRemark(remark).WithLocation(location).Build();
 
-                jobDto.ItemNameList = this._itemNameList;
+                jobDto.ItemNameList = _itemNameList;
 
-                bool isSuccess = new JobController().CreateJob(jobDto);
+                bool isSuccess = new JobController().UpdateJob(jobDto, lblJobId.Text);
 
                 //after submit 
                 if (isSuccess)
                 {
-                    MessageBox.Show(string.Format(Constants.SUCCESSFULLY_CREATED, Constants.JOB));
+                    MessageBox.Show(string.Format(Constants.SUCCESSFULLY_UPDATED, Constants.JOB));
                 }
                 else {
                     MessageBox.Show(Constants.SYSTEM_ERROR);
                 }
 
-                this.ClearFields();
+                ConductDefaultResets();
             }
             //If data is invalid
             catch (InvalidDataException ex)
@@ -154,9 +162,7 @@ namespace e_shift.views
             
             txtLocation.Text = "";
             txtRemark.Text = "";
-
-            //generae custId
-            SetJobId();
+            
             
             ConductDefaultResets();
             
@@ -170,36 +176,61 @@ namespace e_shift.views
         }
 
         private void ConductDefaultResets() {
-
-            //change button txt and flag
-            btnSubmit.Text = "Create";
+            
             this._isDelete = false;
 
             //disable delete btn
             btnDelete.Visible = false;
-            gridJob.ClearSelection();
-
+            itemsGrid.ClearSelection();
+            
+            //hide update job
+            btnUpdateJob.Hide();
+            //hide item add panel & Form
+            itemAddPanel.Hide();
+            fromPanel.Hide();
+            
         }
 
-       
+        private void ReverseResets()
+        {
+            lblJobId.Text = _selectedJob;
+            btnUpdateJob.Show();
+            itemAddPanel.Show();
+            fromPanel.Show();
+
+            try
+            {
+                var jobDto = new JobController().FetchJobDataWithItemsById(_selectedJob);
+                _itemNameList = jobDto.ItemNameList;
+                
+                itemsGrid.DataSource = _itemNameList;
+                itemsGrid.Refresh();
+
+                txtLocation.Text = jobDto.Location;
+                datePickerRequiredDate.Value = jobDto.RequiredDate;
+                txtRemark.Text = jobDto.Remarks;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
         private void On_Row_Click(object sender, DataGridViewCellMouseEventArgs e)
         {
-
-            
-            btnAddItem.Visible = true;
-            this._isDelete = true;
-
             
 
-            int selectedRowCount = gridJob
+            int selectedRowCount = gridPending
               .Rows.GetRowCount(DataGridViewElementStates.Selected);
 
             //grab the selected rows
-            if (1 == selectedRowCount && null != gridJob.SelectedRows[0].Cells[0])
+            if (1 == selectedRowCount && null != gridPending.SelectedRows[0].Cells[0])
             {
-                btnDelete.Visible = true;
-                this._selectedItem = gridJob.SelectedRows[0].Cells[0].Value.ToString();
+                
+                this._selectedJob = gridPending.SelectedRows[0].Cells[0].Value.ToString();
+                
+                ReverseResets();
 
             }
         }
@@ -218,8 +249,8 @@ namespace e_shift.views
 
             this._itemNameList = new BindingList<JobItemDto>(filteredList);
 
-            gridJob.DataSource = _itemNameList;
-            gridJob.Refresh();
+            itemsGrid.DataSource = _itemNameList;
+            itemsGrid.Refresh();
 
         }
 
@@ -274,13 +305,45 @@ namespace e_shift.views
 
 
             //bind to the data source
-            gridJob.DataSource = _itemNameList;
-            gridJob.Refresh();
+            itemsGrid.DataSource = _itemNameList;
+            itemsGrid.Refresh();
         }
 
         private void JobView_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void datePickerRequiredDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtRemark_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Add_Items_Mouse_Click_Handle(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int selectedRowCount = itemsGrid
+                .Rows.GetRowCount(DataGridViewElementStates.Selected);
+
+            //grab the selected rows
+            if (1 == selectedRowCount && null != itemsGrid.SelectedRows[0].Cells[0])
+            {
+                
+                _selectedItem = itemsGrid.SelectedRows[0].Cells[0].Value.ToString();
+                
+
+            }
+            
+            btnDelete.Show();
         }
     }
 }  

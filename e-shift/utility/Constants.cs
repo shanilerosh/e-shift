@@ -18,6 +18,8 @@ namespace e_shift.utility
         //System error
         public static readonly string SYSTEM_ERROR = 
             "System Error. Please contact the administrator";
+        public static readonly string JOB_ERROR = 
+            "Job cannot be created/updated without items";
 
 
         //Success
@@ -29,6 +31,10 @@ namespace e_shift.utility
             "{0} Successfully Updated";
         public static readonly string SUCCESSFULLY_LOGGED_IN =
             "User {0} Successfully Logged In";
+        
+        
+        //SQL Querries
+         
 
 
 
