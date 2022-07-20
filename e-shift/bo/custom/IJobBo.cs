@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using e_shift.utility;
 
 namespace e_shift.bo.custom
 {
@@ -22,5 +23,7 @@ namespace e_shift.bo.custom
         bool UpdateJob(JobDto jobDto, string jobId);
         DataTable FetchDeclinedJobData(string cid);
         DataTable FetchAcceptedJobData(string cid);
+        DataTable FetchAdminJobData(Status status);
+        bool DeclineAcceptJob(string jobId, Status status);
     }
 }

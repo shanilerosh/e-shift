@@ -40,6 +40,14 @@ namespace e_shift.utility
                 throw new InvalidDataException(message);
             }
         }
+        
+        public static void IsEmptyCollection(IList<LoadItemDto> collection, string message)
+        {
+            if (0 == collection.Count)
+            {
+                throw new InvalidDataException(message);
+            }
+        }
 
 
         public static void HasText(string obj, string message)

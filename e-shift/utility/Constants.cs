@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace e_shift.utility
+﻿namespace e_shift.utility
 {
     internal class Constants
     {
@@ -31,6 +25,14 @@ namespace e_shift.utility
             "{0} Successfully Updated";
         public static readonly string SUCCESSFULLY_LOGGED_IN =
             "User {0} Successfully Logged In";
+        
+        public static readonly string SUCCESSFULLY_JOB_ACCEPTED =
+            "Job {0} Successfully Accepted";
+        public static readonly string SUCCESSFULLY_REJECTED =
+            "Job {0} Successfully REJECTED";
+        
+        public static readonly string SUCCESSFULLY_LOAD_CREATED =
+            "Load Successfully Created";
         
         
         //SQL Querries

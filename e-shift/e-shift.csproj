@@ -29,6 +29,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="views\AdminCommonLoad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\AdminCommonJob.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\AdminLoadContainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\AdminJobContainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="views\JobViewPending.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace e_shift.dao
 {
-    internal interface CrudDao<T, ID>: SuperDao
+    internal interface CrudDao<T, ID>
     {
         bool Add(T entity);
         bool Update(T entity);

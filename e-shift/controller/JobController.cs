@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using e_shift.utility;
 
 namespace e_shift.controller
 {
@@ -40,6 +41,11 @@ namespace e_shift.controller
             return bo.FetchAcceptedJobData(cid);
         }
         
+        public DataTable FetchAdminJobData(Status status)
+        {
+            return bo.FetchAdminJobData(status);
+        }
+        
         public JobDto FetchJobDataWithItemsById(string jobId)
         {
             return bo.FetchJobDtoByJobId(jobId);
@@ -48,6 +54,11 @@ namespace e_shift.controller
         public bool UpdateJob(JobDto jobDto, string jobId)
         {
             return bo.UpdateJob(jobDto, jobId);
+        }
+        
+        public bool DeclineAcceptJob(string jobId, Status status)
+        {
+            return bo.DeclineAcceptJob(jobId, status);
         }
     }
 }

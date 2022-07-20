@@ -10,6 +10,7 @@ namespace e_shift.utility
     {
         PENDING,
         ACCEPTED,
-        DECLINED
+        DECLINED,
+        COMPLETED
     }
 }

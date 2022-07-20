@@ -154,5 +154,20 @@ namespace e_shift.bo.custom.impl
 
             return dao.GetJobDataByStatusAndCustId(Status.ACCEPTED, cid);
         }
+
+        public DataTable FetchAdminJobData(Status status)
+        {
+            return dao.GetJobDataByStatus(status.ToString());
+        }
+
+        public bool DeclineAcceptJob(string jobId, Status status)
+        {
+            //fetch the job object
+            var job = dao.findJobById(jobId);
+            
+            Assert.IsNull(job, "No job found with the id "+job.JobId);
+            
+            return dao.UpdateJobStatus(jobId, status.ToString());
+        }
     }
 }

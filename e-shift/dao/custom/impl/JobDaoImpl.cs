@@ -198,6 +198,41 @@ namespace e_shift.dao.custom.impl
             }
         }
 
+        public DataTable GetJobDataByStatus(string status)
+        {
+            return CrudUtil.ExecuteSelectQueryForDataGrid(
+                $"SELECT jobId AS [Job Id],jobLocation" +
+                $" As [Location],createdDateTime AS [Created At],jobStatus As [Job Status],c.firstname AS [Customer Name]" +
+                $" FROM db.job INNER JOIN db.customer c on c.cid = job.custId WHERE jobStatus = '{status}' ORDER BY createdDateTime DESC");
+        }
+
+        public bool UpdateJobStatus(string jobId, string status)
+        {
+            /*Get the singleton connection*/
+            var conn = DbConnection.GetInstance().GetConnection();
+
+            conn.Open();
+            
+            try
+            {
+                //insert to master job table
+                using (var jobCommand = new SqlCommand("UPDATE db.job SET jobStatus = @jobStatus WHERE jobId = @jobId", conn))
+                {
+                    jobCommand.Parameters.AddWithValue("@jobStatus", status);
+                    jobCommand.Parameters.AddWithValue("@jobId", jobId);
+                
+
+                    jobCommand.ExecuteNonQuery();
+                }
+
+                return true;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         public string GetJobID()
         {
             try

@@ -21,5 +21,7 @@ namespace e_shift.dao.custom
 
         List<Item> findListOfItemsByJobId(String id);
         bool UpdateJob(string jobId, Job job);
+        DataTable GetJobDataByStatus(string toString);
+        bool UpdateJobStatus(string jobId, string toString);
     }
 }

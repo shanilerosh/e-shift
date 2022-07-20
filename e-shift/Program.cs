@@ -19,8 +19,11 @@ namespace e_shift
 
             var customerDto = new CustomerDto();
             customerDto.Cid = "C001";
+
+            var dto = new UserDto();
             
-            Application.Run(new JobContainer(customerDto));
+            Application.Run(new AdminCommonLoad(Status.PENDING));
+            //Application.Run(new AdminJobContainer(dto));
             //Application.Run(new JobView(customerDto));
            // Application.Run(new LoginView());
         }
