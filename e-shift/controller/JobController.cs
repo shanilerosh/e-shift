@@ -31,6 +31,12 @@ namespace e_shift.controller
             return bo.FetchPendingJobData(cid);
         }
         
+        public DataTable FetchCompletedJobData(string cid)
+        {
+            return bo.FetchCompletedJobData(cid);
+        }
+        
+        
         public DataTable FetchDeclinedJobData(string cid)
         {
             return bo.FetchDeclinedJobData(cid);

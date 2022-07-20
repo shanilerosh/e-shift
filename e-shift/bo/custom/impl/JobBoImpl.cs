@@ -169,5 +169,16 @@ namespace e_shift.bo.custom.impl
             
             return dao.UpdateJobStatus(jobId, status.ToString());
         }
+
+        public DataTable FetchCompletedJobData(string cid)
+        {
+            //validate customer
+            var customer = custDao.findByCustId(cid);
+            
+            Assert.IsNull(customer,"No Customer found with the id " +cid);
+
+            return dao.GetJobDataByStatusAndCustId(Status.COMPLETED, cid);
+        }
+        
     }
 }

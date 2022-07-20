@@ -22,18 +22,31 @@ namespace e_shift.views
         {
             this._userDetail = userDto;  
             InitializeComponent();
+            SetDefaultResets();
             SetPriviladges();
-            SetUserData();
+            SetUserData();          
+        }
+
+        private void SetDefaultResets()
+        {
+            panelMainCustomer.Hide();
         }
 
         private void SetUserData()
         {
             try
             {
+                lblUserName.Text = _userDetail.Username;
+
+
                 if (_userDetail.Role == Role.CUSTOMER)
                 {
                     _customer = new CustomerController()
                         .findCustomerByUserId(_userDetail.Uid);
+                    
+                    panelMainCustomer.Show();
+
+                    CustomerDashBoardView();
                 }
             }
             catch (InvalidDataException ex)
@@ -50,9 +63,7 @@ namespace e_shift.views
 
         private void SetPriviladges()
         {
-            if (!Role.ADMIN.Equals(_userDetail.Role)) {
-                btnOrder.Hide();
-            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -86,11 +97,37 @@ namespace e_shift.views
 
         private void Btn_Main_Job_Click_Handle(object sender, EventArgs e)
         {
-            JobView jobView = new JobView(_customer);
-            jobView.TopLevel = false;
-            panelMain.Controls.Add(jobView);
-            jobView.BringToFront();
-            jobView.Show();
+            
+        }
+
+        private void Btn_Cust_Job_Panel_Click(object sender, EventArgs e)
+        {
+            var jobContainer = new JobContainer(_customer);
+            jobContainer.TopLevel = false;
+            panelMain.Controls.Add(jobContainer);
+            jobContainer.BringToFront();
+            jobContainer.Show();
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btn_Customer_DashBoard_Click(object sender, EventArgs e)
+        {
+            CustomerDashBoardView();
+
+        }
+
+        private void CustomerDashBoardView() {
+
+            var customerDashBoard = new CustomerDashBoard(_customer);
+            customerDashBoard.TopLevel = false;
+            panelMain.Controls.Add(customerDashBoard);
+            customerDashBoard.BringToFront();
+            customerDashBoard.Show();
         }
     }
 

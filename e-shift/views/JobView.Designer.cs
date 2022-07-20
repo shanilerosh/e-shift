@@ -81,6 +81,7 @@
             // 
             // gridJob
             // 
+            this.gridJob.AllowUserToAddRows = false;
             this.gridJob.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridJob.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridJob.Location = new System.Drawing.Point(46, 258);
@@ -91,13 +92,12 @@
             this.gridJob.Size = new System.Drawing.Size(725, 112);
             this.gridJob.TabIndex = 11;
             this.gridJob.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.On_Row_Click);
-            this.gridJob.AllowUserToAddRows = false;
             // 
             // lblJobId
             // 
             this.lblJobId.AutoSize = true;
             this.lblJobId.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblJobId.Location = new System.Drawing.Point(622, 12);
+            this.lblJobId.Location = new System.Drawing.Point(517, 12);
             this.lblJobId.Name = "lblJobId";
             this.lblJobId.Size = new System.Drawing.Size(0, 23);
             this.lblJobId.TabIndex = 12;

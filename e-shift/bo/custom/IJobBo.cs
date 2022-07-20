@@ -25,5 +25,7 @@ namespace e_shift.bo.custom
         DataTable FetchAcceptedJobData(string cid);
         DataTable FetchAdminJobData(Status status);
         bool DeclineAcceptJob(string jobId, Status status);
+        
+        DataTable FetchCompletedJobData(string cid);
     }
 }

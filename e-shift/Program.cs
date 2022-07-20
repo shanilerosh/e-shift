@@ -21,8 +21,11 @@ namespace e_shift
             customerDto.Cid = "C001";
 
             var dto = new UserDto();
+            dto.Uid = 11;
+            dto.Username = "Shanil";
+            dto.Role = Role.CUSTOMER;
             
-            Application.Run(new AdminCommonLoad(Status.PENDING));
+            Application.Run(new MainPanelView(dto));
             //Application.Run(new AdminJobContainer(dto));
             //Application.Run(new JobView(customerDto));
            // Application.Run(new LoginView());

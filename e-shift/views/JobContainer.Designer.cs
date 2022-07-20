@@ -104,10 +104,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ControlBox = false;
             this.Controls.Add(this.panelJobMain);
             this.Controls.Add(this.panel1);
             this.Name = "JobContainer";
-            this.Text = "JobContainer";
             this.Load += new System.EventHandler(this.JobContainer_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
