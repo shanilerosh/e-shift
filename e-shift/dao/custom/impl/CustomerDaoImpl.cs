@@ -100,7 +100,7 @@ namespace e_shift.dao.custom.impl
                             return new Customer(sqlDataReader.GetString(0),
                                 sqlDataReader.GetString(1), sqlDataReader.GetString(2),
                                 sqlDataReader.GetString(3), sqlDataReader.GetString(4),
-                                sqlDataReader.GetString(5));
+                                sqlDataReader.GetString(5),sqlDataReader.GetInt32(6));
                             
                         }
                     }

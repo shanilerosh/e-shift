@@ -35,6 +35,7 @@
             this.btnDashBoardCust = new System.Windows.Forms.Button();
             this.btnJobCustomer = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panelMainCustomer.SuspendLayout();
             this.SuspendLayout();
@@ -64,7 +65,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(12, 9);
+            this.label3.Location = new System.Drawing.Point(21, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 14);
             this.label3.TabIndex = 31;
@@ -73,11 +74,12 @@
             // 
             // panelMainCustomer
             // 
+            this.panelMainCustomer.Controls.Add(this.button1);
             this.panelMainCustomer.Controls.Add(this.btnDashBoardCust);
             this.panelMainCustomer.Controls.Add(this.btnJobCustomer);
             this.panelMainCustomer.Location = new System.Drawing.Point(12, 75);
             this.panelMainCustomer.Name = "panelMainCustomer";
-            this.panelMainCustomer.Size = new System.Drawing.Size(124, 187);
+            this.panelMainCustomer.Size = new System.Drawing.Size(124, 238);
             this.panelMainCustomer.TabIndex = 5;
             // 
             // btnDashBoardCust
@@ -111,6 +113,17 @@
             this.panelMain.TabIndex = 1;
             this.panelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMain_Paint);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.SlateGray;
+            this.button1.Location = new System.Drawing.Point(7, 178);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(113, 37);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Manage Customer";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.Manage_Customer_Btn_Click);
+            // 
             // MainPanelView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -137,5 +150,6 @@
         private Panel panelMainCustomer;
         private Label label3;
         private Label lblUserName;
+        private Button button1;
     }
 }

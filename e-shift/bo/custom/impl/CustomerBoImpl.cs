@@ -99,8 +99,24 @@ namespace e_shift.bo.custom.impl
             }
             
             //convert customer entity to dto
-            return CustomerDto.Builder().WithFirstName(customer.FirstName)
+            return CustomerDto.Builder().WithFirstName(customer.FirstName).WithAddress(customer.Address)
+                .WithNic(customer.Nic).WithContactNumber(customer.ContactNumber)
+                .WithLastName(customer.LastName)
                 .WithCId(customer.Cid).Build();
+        }
+
+
+        public UserDto findUserDtoByCustId(string custId)
+        {
+            var customer = dao.findByCustId(custId);
+            
+            Assert.IsNull(customer, "Customer not found");
+
+            var user = userDao.findByUserId(customer.Uid);
+            
+            Assert.IsNull(customer, "No user exist with the user is "+user.Uid);
+
+            return new UserDto(user.Uid, user.Username, user.Role);
         }
     }
 }

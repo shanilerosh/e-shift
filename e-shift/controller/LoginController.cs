@@ -5,19 +5,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using e_shift.bo.custom;
 
 namespace e_shift.controller
 {
     internal class LoginController
     {
 
+        private LoginBo _bo = new LoginBoImpl();
+        
         public UserDto LoginUser(UserDto userDto, bool isAdmin) {
-            return new LoginBoImpl().Login(userDto,isAdmin);
+            return _bo.Login(userDto,isAdmin);
           
         }
 
-        public String getCustomerId() { 
-            return new CustomerBoImpl().GetCustomerId();
+        public bool UpdatePassword(string userName, string pass)
+        {
+            return _bo.UpdatePassword(userName, pass);
         }
     }
 }

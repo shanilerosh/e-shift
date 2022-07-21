@@ -41,6 +41,9 @@
     <Compile Update="views\AdminJobContainer.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="views\CustomerUpdateView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="views\JobViewPending.cs">
       <SubType>Form</SubType>
     </Compile>

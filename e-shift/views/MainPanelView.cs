@@ -129,6 +129,15 @@ namespace e_shift.views
             customerDashBoard.BringToFront();
             customerDashBoard.Show();
         }
+
+        private void Manage_Customer_Btn_Click(object sender, EventArgs e)
+        {
+            var customerUpdate = new CustomerUpdateView(_customer);
+            customerUpdate.TopLevel = false;
+            panelMain.Controls.Add(customerUpdate);
+            customerUpdate.BringToFront();
+            customerUpdate.Show();
+        }
     }
 
 }

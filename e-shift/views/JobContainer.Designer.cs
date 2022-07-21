@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -39,6 +40,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
@@ -50,13 +52,23 @@
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(428, 4);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(108, 23);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "Completed Job";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.Completed_Job_Final_Click_Handle);
+            // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(322, 4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(108, 23);
             this.button4.TabIndex = 3;
-            this.button4.Text = "Completed Job";
+            this.button4.Text = "Accepted Job";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.Completed_Job_Click_Handle);
             // 
@@ -122,5 +134,6 @@
         private Button button2;
         private Panel panelJobMain;
         private Button button4;
+        private Button button5;
     }
 }

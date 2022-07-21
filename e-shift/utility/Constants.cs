@@ -35,6 +35,10 @@
             "Load Successfully Created";
         
         
+        public static readonly string PRE_PASS_INVALID = 
+            "Invalid Previous Password Entered. Please try again";
+        
+        
         //SQL Querries
          
 

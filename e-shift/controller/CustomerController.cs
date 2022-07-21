@@ -47,6 +47,11 @@ namespace e_shift.controller
             return new CustomerBoImpl().findByUserId(uuid);
         }
 
+        public UserDto fetchUserByCustomerId(String custID)
+        {
+            return new CustomerBoImpl().findUserDtoByCustId(custID);
+        }
+
 
     }
 }

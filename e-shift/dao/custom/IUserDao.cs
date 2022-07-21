@@ -16,9 +16,8 @@ namespace e_shift.dao.custom
 
         User CheckWithUserNameAndPass(string userName, string password);
 
-        bool CreateNewUser(User user);
+        User findByUserId(int userId);
 
-        User CheckWithUserNameAndGetUserObj(string username);
-        
+        bool UpdateUserPasswordByUserName(string userName, string pass);
     }
 }

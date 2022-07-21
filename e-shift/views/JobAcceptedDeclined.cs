@@ -46,6 +46,10 @@ namespace e_shift.views
                 {
                     dt = new JobController().FetchAcceptedJobData(_loggdUser.Cid);
                 }
+                else if(_status.Equals(Status.COMPLETED))
+                {
+                    dt = new JobController().FetchCompletedJobData(_loggdUser.Cid);
+                }
                 else
                 {
                     dt = new JobController().FetchDeclinedJobData(_loggdUser.Cid);
@@ -70,9 +74,19 @@ namespace e_shift.views
 
         private void ChangeHeaderNames()
         {
-            var heading = Status.ACCEPTED == _status
-                ? "My Competed Jobs"
-                : "My Declined Jobs";
+            var heading = "";
+
+            if (_status.Equals(Status.ACCEPTED))
+            {
+                heading = "Accepted Jobs";
+            }
+            else if (_status.Equals(Status.COMPLETED))
+            {
+                heading = "Completed Jobs";
+            }
+            else {
+                heading = "Declined Jobs";
+            }
 
             lblHeader.Text = heading;
         }

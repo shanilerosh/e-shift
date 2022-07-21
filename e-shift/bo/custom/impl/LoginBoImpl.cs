@@ -37,5 +37,15 @@ namespace e_shift.bo.custom.impl
 
             return UserDto.Builder().WithUserName(user.Username).WithRole(user.Role).WithUid(user.Uid).Build();
         }
+
+        public bool UpdatePassword(string userName, string pass)
+        {
+            //check if an user exist with the username
+            bool ifUserNameExist = dao.CheckWithUserName(userName);
+
+            Assert.IsTrue(ifUserNameExist, "No user exist with the username " + userName);
+
+            return dao.UpdateUserPasswordByUserName(userName, pass);
+        }
     }
 }

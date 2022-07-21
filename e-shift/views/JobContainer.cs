@@ -79,5 +79,14 @@ namespace e_shift.views
             jobAdView.Show();
 
         }
+
+        private void Completed_Job_Final_Click_Handle(object sender, EventArgs e)
+        {
+            var jobAdView = new JobAcceptedDeclined(_customerDto, Status.COMPLETED);
+            jobAdView.TopLevel = false;
+            panelJobMain.Controls.Add(jobAdView);
+            jobAdView.BringToFront();
+            jobAdView.Show();
+        }
     }
 }

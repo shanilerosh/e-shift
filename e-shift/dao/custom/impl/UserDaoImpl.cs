@@ -14,33 +14,6 @@ namespace e_shift.dao.custom.impl
 {
     internal class UserDaoImpl : IUserDao
     {
-
-        public bool Add(User entity)
-        {
-
-            /*  try
-              {
-                  var keyValPair = new Dictionary<string, object>();
-
-                  keyValPair.Add("@cid", entity.Cid);
-                  keyValPair.Add("@firstName", entity.FirstName);
-                  keyValPair.Add("@lastName", entity.LastName);
-                  keyValPair.Add("@nic", entity.Nic);
-                  keyValPair.Add("@address", entity.Address);
-                  keyValPair.Add("@contactNumber", entity.ContactNumber);
-
-
-                  return CrudUtil.ExecuteUpdateDelete("INSERT INTO db.customer(cid,firstname,lastname,nic,address,contactnumber) Values (@cid,@firstName,@lastName,@nic,@address,@contactNumber)",
-                      keyValPair);
-              }
-              catch (Exception)
-              {
-
-                  throw;
-              }*/
-            return true;
-        }
-
         public bool CheckWithUserName(string userName)
         {
             var keyValPair = new Dictionary<string, object>();
@@ -88,6 +61,52 @@ namespace e_shift.dao.custom.impl
             
             return null;
         }
+        
+        
+
+        public User findByUserId(int userId)
+        {
+            {
+                try
+                {
+                    using (var sqlDataReader = CrudUtil
+                               .ExecuteSelectQuery("SELECT TOP 1 * FROM db.userdata WHERE uid = '" + userId + "'"))
+                    {
+                        //.ExecuteSelectQuery("SELECT * FROM db.customer")) {
+                        if (sqlDataReader.HasRows)
+                        {
+
+                            while (sqlDataReader.Read())
+                            {
+
+                                Role role = (Role)Enum.Parse(typeof(Role), sqlDataReader.GetString(3));
+                                return new User(sqlDataReader.GetInt32(0),
+                                    sqlDataReader.GetString(1), role);
+
+                            }
+                        }
+                    }
+                }
+                finally
+                {
+                    DbConnection.GetInstance().GetConnection().Close();
+                }
+
+                return null;
+            }
+        }
+
+        public bool UpdateUserPasswordByUserName(string userName, string pass)
+        {
+            var keyValPair = new Dictionary<string, object>();
+
+            keyValPair.Add("@password", pass);
+            keyValPair.Add("@username", userName);
+            
+            return CrudUtil
+                .ExecuteUpdateDelete("UPDATE db.userdata SET password = @password WHERE username = @username",
+                    keyValPair);
+        }
 
 
         public User? CheckWithUserNameAndGetUserObj(string username)
@@ -132,55 +151,7 @@ namespace e_shift.dao.custom.impl
             return CrudUtil.ExecuteUpdateDelete("INSERT INTO db.userdata(username,password,role) VALUES (@username,@password,@role)",
                 keyValPair);
         }
-
-        public bool Delete(string id)
-        {
-         /*   var keyValPair = new Dictionary<string, object>();
-
-            //adding cid for the where clause
-            keyValPair.Add("@cid", id);
-
-            return CrudUtil.ExecuteUpdateDelete("DELETE FROM db.customer WHERE cid = @cid",
-                keyValPair);*/
-
-            return false;
-        }
-
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public DataTable GetAll()
-        {
-            return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT * FROM db.customer");
-        }
-
-
-     
-
-        public DataTable SearchUser(string fields, string val)
-        {
-
-            return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT * FROM db.customer WHERE "+ fields + " LIKE '%" +val+ "%'");
-            
-
-        }
-
-        public bool Update(User entity)
-        {
-            var keyValPair = new Dictionary<string, object>();
-
-            /*keyValPair.Add("@firstName", entity.FirstName);
-            keyValPair.Add("@lastName", entity.LastName);
-            keyValPair.Add("@nic", entity.Nic);
-            keyValPair.Add("@address", entity.Address);
-            keyValPair.Add("@contactNumber", entity.ContactNumber);
-            keyValPair.Add("@cid", entity.Cid);*/
-
-            return CrudUtil
-                .ExecuteUpdateDelete("UPDATE db.customer SET firstname = @firstName ,lastname = @lastname ,nic = @nic ,address = @address, contactnumber = @contactnumber WHERE cid = @cid",
-                keyValPair);
-        }
+        
+      
     }
 }
