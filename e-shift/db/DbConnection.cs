@@ -11,7 +11,8 @@ namespace e_shift.db
 
         public DbConnection()
         {
-            String connectionString = @"Data Source=localhost;Initial Catalog=e-shift;User ID=sa;Password=Wangedigala@123";
+            String connectionString =
+                @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Admin\Desktop\C#\e-shift\e-shift\Database2.mdf;Integrated Security=True";
             connection = new SqlConnection(connectionString);
         }
 

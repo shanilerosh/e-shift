@@ -7,51 +7,62 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using e_shift.utility;
 
 namespace e_shift.controller
 {
     internal class CustomerController
     {
+        private ICustomerBo _bo = new CustomerBoImpl();
         
         public bool SaveCustomer(CustomerDto customer) {
-            return new CustomerBoImpl().AddCustomer(customer);
+            return _bo.AddCustomer(customer);
         }
 
         public bool UpdateCustomer(CustomerDto customer, string id)
         {
-            return new CustomerBoImpl().UpdateCustomer(customer,id);
+            return _bo.UpdateCustomer(customer,id);
         }
 
         public bool DeleteCustomer(string id)
         {
-            return new CustomerBoImpl().DeleteCustomer(id);
+            return _bo.DeleteCustomer(id);
         }
 
         public DataTable GetAllCustomers()
         {
-            return new CustomerBoImpl().GetAllCustomers();
+            return _bo.GetAllCustomers();
         }
 
         public string GetCustId()
         {
-            return new CustomerBoImpl().GetCustomerId();
+            return _bo.GetCustomerId();
         }
 
         public DataTable SearchCustomers(string atr, string search)
         {
-            return new CustomerBoImpl().SearchCustomers(atr,search);
+            return _bo.SearchCustomers(atr,search);
         }
         
-        public CustomerDto findCustomerByUserId(int uuid)
+        public CustomerDto FindCustomerByUserId(int uuid)
         {
-            return new CustomerBoImpl().findByUserId(uuid);
+            return _bo.FindByUserId(uuid);
         }
 
-        public UserDto fetchUserByCustomerId(String custID)
+        public UserDto FetchUserByCustomerId(String custID)
         {
-            return new CustomerBoImpl().findUserDtoByCustId(custID);
+            return _bo.FindUserDtoByCustId(custID);
+        }
+
+        public DataTable FetchCustomerByStatus(CustomerStatus status)
+        {
+            return _bo.FetchCustomerByStatus(status);
         }
 
 
+        public bool UpdateCustomerStatus(CustomerStatus status, string text)
+        {
+            return _bo.UpdateCustomerStatus(status,text);
+        }
     }
 }

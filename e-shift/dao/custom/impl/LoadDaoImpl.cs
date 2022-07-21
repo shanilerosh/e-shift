@@ -22,7 +22,7 @@ public class LoadDaoImpl : ILoadDao
                 //insert into job tables
                 foreach (var loadItem in loadItems)
                 {
-                    using (var loadCmd = new SqlCommand("INSERT INTO db.load(did,vid,jid,loadDateTime) Values (@did,@vid,@jid,@loadDateTime)"
+                    using (var loadCmd = new SqlCommand("INSERT INTO load(did,vid,jid,loadDateTime) Values (@did,@vid,@jid,@loadDateTime)"
                                , conn, transaction))
                     {
                         loadCmd.Parameters.AddWithValue("@did", loadItem.Did);
@@ -36,7 +36,7 @@ public class LoadDaoImpl : ILoadDao
                 }
                 
                 //update the job table
-                using (var jobCommand = new SqlCommand("UPDATE db.job SET jobStatus = @jobStatus WHERE jobId = @jobId", conn, transaction))
+                using (var jobCommand = new SqlCommand("UPDATE job SET jobStatus = @jobStatus WHERE jobId = @jobId", conn, transaction))
                 {
                     jobCommand.Parameters.AddWithValue("@jobStatus", Status.COMPLETED.ToString());
                     jobCommand.Parameters.AddWithValue("@jobId", jobId);

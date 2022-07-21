@@ -25,7 +25,7 @@ namespace e_shift.dao.custom.impl
                 keyValPair.Add("@itemName", entity.ItemName);
                 keyValPair.Add("@remark", entity.Remark);
 
-                return CrudUtil.ExecuteUpdateDelete("INSERT INTO db.item(iid,itemName,remark) Values (@iid,@itemName,@remark)",
+                return CrudUtil.ExecuteUpdateDelete("INSERT INTO item(iid,itemName,remark) Values (@iid,@itemName,@remark)",
                     keyValPair);
             
         }
@@ -39,13 +39,13 @@ namespace e_shift.dao.custom.impl
             //adding cid for the where clause
             keyValPair.Add("@iid", id);
 
-            return CrudUtil.ExecuteUpdateDelete("DELETE FROM db.item WHERE iid = @iid",
+            return CrudUtil.ExecuteUpdateDelete("DELETE FROM item WHERE iid = @iid",
                 keyValPair);
         }
 
         public DataTable GetAll()
         {
-            return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT * FROM db.item");
+            return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT * FROM item");
         }
 
         public Item GetItemByName(string name)
@@ -53,7 +53,7 @@ namespace e_shift.dao.custom.impl
             try
             {
                 using (SqlDataReader sqlDataReader = CrudUtil
-                   .ExecuteSelectQuery("SELECT TOP 1 * FROM db.item WHERE itemName = '" + name + "'"))
+                   .ExecuteSelectQuery("SELECT TOP 1 * FROM item WHERE itemName = '" + name + "'"))
                 {
                     if (sqlDataReader.HasRows)
                     {
@@ -79,9 +79,8 @@ namespace e_shift.dao.custom.impl
             try
             {
                 using (SqlDataReader sqlDataReader = CrudUtil
-                   .ExecuteSelectQuery("SELECT TOP 1 iid FROM db.item ORDER BY iid DESC"))
+                   .ExecuteSelectQuery("SELECT TOP 1 iid FROM item ORDER BY iid DESC"))
                 {
-                    //.ExecuteSelectQuery("SELECT * FROM db.customer")) {
                     if (sqlDataReader.HasRows)
                     {
 
@@ -103,7 +102,7 @@ namespace e_shift.dao.custom.impl
         public DataTable SearchItem(string fields, string val)
         {
 
-            return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT * FROM db.item WHERE " + fields + " LIKE '%" +val+ "%'");
+            return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT * FROM item WHERE " + fields + " LIKE '%" +val+ "%'");
             
 
         }
@@ -117,7 +116,7 @@ namespace e_shift.dao.custom.impl
             keyValPair.Add("@iid", entity.Iid);
 
             return CrudUtil
-                .ExecuteUpdateDelete("UPDATE db.item SET itemName = @itemName ,remark = @remark WHERE iid = @iid",
+                .ExecuteUpdateDelete("UPDATE item SET itemName = @itemName ,remark = @remark WHERE iid = @iid",
                 keyValPair);
         }
     }

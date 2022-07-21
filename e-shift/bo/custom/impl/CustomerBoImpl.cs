@@ -24,9 +24,14 @@ namespace e_shift.bo.custom.impl
 
             Assert.IsFalse(isExist, "User with the username " + customerDto.UserName + " already exist. Please try again with a new username");
 
-            var userEntity = new User(customerDto.UserName, customerDto.Password, Role.CUSTOMER);
+            //hash the password
+            var userEntity = new User(customerDto.UserName, PasswordUtility.HashPassword(customerDto.Password), Role.CUSTOMER);
+            
             var customerEntity = new Customer(GetCustomerId(), customerDto.FirstName, customerDto.LastName,
                 customerDto.Nic, customerDto.Address, customerDto.ContactNumber);
+
+            //when registering all customer are set as not approved
+            customerEntity.CustomerStatus = CustomerStatus.NOT_APPROVED;
 
             //Transactional --> create new Customer and user
             return dao.CreateUserAndCustomerTransaction(customerEntity, userEntity);
@@ -88,7 +93,7 @@ namespace e_shift.bo.custom.impl
             return custId;
         }
 
-        public CustomerDto findByUserId(int userId)
+        public CustomerDto FindByUserId(int userId)
         {
             //find the customer entity
             var customer = dao.findByUserId(userId);
@@ -106,7 +111,7 @@ namespace e_shift.bo.custom.impl
         }
 
 
-        public UserDto findUserDtoByCustId(string custId)
+        public UserDto FindUserDtoByCustId(string custId)
         {
             var customer = dao.findByCustId(custId);
             
@@ -117,6 +122,16 @@ namespace e_shift.bo.custom.impl
             Assert.IsNull(customer, "No user exist with the user is "+user.Uid);
 
             return new UserDto(user.Uid, user.Username, user.Role);
+        }
+
+        public DataTable FetchCustomerByStatus(CustomerStatus status)
+        {
+            return dao.GetAllByStatus(status);
+        }
+
+        public bool UpdateCustomerStatus(CustomerStatus status, string text)
+        {
+            return dao.UpdateCustStatus(status, text);
         }
     }
 }

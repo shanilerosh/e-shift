@@ -33,7 +33,7 @@ namespace e_shift.views
             try
             {
 
-                var userDto = new CustomerController().fetchUserByCustomerId(_customerDto.Cid);
+                var userDto = new CustomerController().FetchUserByCustomerId(_customerDto.Cid);
 
                 _userDto = userDto;
                 
@@ -72,7 +72,7 @@ namespace e_shift.views
         {
             try
             {
-                var customer = new CustomerController().findCustomerByUserId(_userDto.Uid);
+                var customer = new CustomerController().FindCustomerByUserId(_userDto.Uid);
                 _customerDto = customer;
                 
                 SetDtoValuesToFields();

@@ -28,7 +28,7 @@ namespace e_shift.dao.custom.impl
                 keyValPair.Add("@vehicleno", entity.VehicleNo);
                 keyValPair.Add("@capacity", entity.Capacity);
 
-                return CrudUtil.ExecuteUpdateDelete("INSERT INTO db.transportunit(tid,vehicletype,model,vehicleno,capacity) Values (@tid,@vehicletype,@model,@vehicleno,@capacity)",
+                return CrudUtil.ExecuteUpdateDelete("INSERT INTO transportunit(tid,vehicletype,model,vehicleno,capacity) Values (@tid,@vehicletype,@model,@vehicleno,@capacity)",
                     keyValPair);
             }
             catch (Exception)
@@ -47,13 +47,13 @@ namespace e_shift.dao.custom.impl
             //adding cid for the where clause
             keyValPair.Add("@tid", id);
 
-            return CrudUtil.ExecuteUpdateDelete("DELETE FROM db.transportunit WHERE tid = @tid",
+            return CrudUtil.ExecuteUpdateDelete("DELETE FROM transportunit WHERE tid = @tid",
                 keyValPair);
         }
 
         public DataTable GetAll()
         {
-            return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT * FROM db.transportunit");
+            return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT * FROM transportunit");
         }
 
         public string GetTransportUnitId()
@@ -61,9 +61,9 @@ namespace e_shift.dao.custom.impl
             try
             {
                 using (SqlDataReader sqlDataReader = CrudUtil
-                   .ExecuteSelectQuery("SELECT TOP 1 tid FROM db.transportunit ORDER BY tid DESC"))
+                   .ExecuteSelectQuery("SELECT TOP 1 tid FROM transportunit ORDER BY tid DESC"))
                 {
-                    //.ExecuteSelectQuery("SELECT * FROM db.customer")) {
+                    //.ExecuteSelectQuery("SELECT * FROM customer")) {
                     if (sqlDataReader.HasRows)
                     {
 
@@ -85,7 +85,7 @@ namespace e_shift.dao.custom.impl
         public DataTable SearchTransportUnit(string fields, string val)
         {
 
-            return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT * FROM db.transportunit WHERE " + fields + " LIKE '%" +val+ "%'");
+            return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT * FROM transportunit WHERE " + fields + " LIKE '%" +val+ "%'");
             
 
         }
@@ -101,7 +101,7 @@ namespace e_shift.dao.custom.impl
             keyValPair.Add("@tid", entity.TpId);
 
             return CrudUtil
-                .ExecuteUpdateDelete("UPDATE db.transportunit SET vehicletype = @vehicletype ,model = @model ,vehicleno = @vehicleno ,capacity = @capacity WHERE tid = @tid",
+                .ExecuteUpdateDelete("UPDATE transportunit SET vehicletype = @vehicletype ,model = @model ,vehicleno = @vehicleno ,capacity = @capacity WHERE tid = @tid",
                 keyValPair);
         }
     }

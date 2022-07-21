@@ -25,10 +25,11 @@ namespace e_shift
             dto.Username = "Shanil";
             dto.Role = Role.CUSTOMER;
             
-            Application.Run(new MainPanelView(dto));
+             //Application.Run(new ItemView());
+             //Application.Run(new MainPanelView(dto));
             //Application.Run(new AdminJobContainer(dto));
             //Application.Run(new JobView(customerDto));
-           // Application.Run(new LoginView());
+           Application.Run(new LoginView());
         }
     }
 }

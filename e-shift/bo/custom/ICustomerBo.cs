@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using e_shift.utility;
 
 namespace e_shift.bo.custom
 {
@@ -22,6 +23,10 @@ namespace e_shift.bo.custom
 
         String GetCustomerId();
 
-        CustomerDto findByUserId(int userId);
+        CustomerDto FindByUserId(int userId);
+
+        UserDto FindUserDtoByCustId(string custId);
+        DataTable FetchCustomerByStatus(CustomerStatus status);
+        bool UpdateCustomerStatus(CustomerStatus status, string text);
     }
 }

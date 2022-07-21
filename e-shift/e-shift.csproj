@@ -7,6 +7,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <IsPublishable>True</IsPublishable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -41,6 +42,9 @@
     <Compile Update="views\AdminJobContainer.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="views\AdminDashBoard.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="views\CustomerUpdateView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +58,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="views\ItemView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\CustomerAdminView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="views\TransportView.cs">

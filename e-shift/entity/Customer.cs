@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using e_shift.utility;
 
 namespace e_shift.entity
 {
@@ -17,6 +18,7 @@ namespace e_shift.entity
         private String contactNumber;
         //user entity foreign constraint
         private int uid;
+        private CustomerStatus _customerStatus;
 
 
        
@@ -42,5 +44,6 @@ namespace e_shift.entity
         public string Cid { get => cid; set => cid = value; }
         public string ContactNumber { get => contactNumber; set => contactNumber = value; }
         public int Uid { get => uid; set => uid = value; }
+        public CustomerStatus CustomerStatus { get => _customerStatus; set => _customerStatus = value; }
     }
 }

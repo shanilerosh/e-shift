@@ -1,6 +1,6 @@
 ﻿namespace e_shift.views
 {
-    partial class CustomerDashBoard
+    partial class AdminDashBoard
     {
         /// <summary>
         /// Required designer variable.
@@ -32,13 +32,13 @@
             this.lblPendingJobs = new System.Windows.Forms.Label();
             this.customerIdNameLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lblDiscardedJobs = new System.Windows.Forms.Label();
+            this.lblPendingCustomers = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.lblAcceptedJobs = new System.Windows.Forms.Label();
+            this.lblRegisteredItems = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.lblJobsToday = new System.Windows.Forms.Label();
+            this.lblDriverCount = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -79,91 +79,91 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel2.Controls.Add(this.lblDiscardedJobs);
+            this.panel2.Controls.Add(this.lblPendingCustomers);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(463, 92);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(243, 109);
             this.panel2.TabIndex = 16;
             // 
-            // lblDiscardedJobs
+            // lblPendingCustomers
             // 
-            this.lblDiscardedJobs.AutoSize = true;
-            this.lblDiscardedJobs.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblDiscardedJobs.Location = new System.Drawing.Point(106, 56);
-            this.lblDiscardedJobs.Name = "lblDiscardedJobs";
-            this.lblDiscardedJobs.Size = new System.Drawing.Size(0, 23);
-            this.lblDiscardedJobs.TabIndex = 15;
+            this.lblPendingCustomers.AutoSize = true;
+            this.lblPendingCustomers.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblPendingCustomers.Location = new System.Drawing.Point(113, 56);
+            this.lblPendingCustomers.Name = "lblPendingCustomers";
+            this.lblPendingCustomers.Size = new System.Drawing.Size(0, 23);
+            this.lblPendingCustomers.TabIndex = 15;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(29, 14);
+            this.label2.Location = new System.Drawing.Point(27, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(169, 23);
+            this.label2.Size = new System.Drawing.Size(205, 23);
             this.label2.TabIndex = 14;
-            this.label2.Text = "Total Discarded Jobs";
+            this.label2.Text = "Total Pending Customers";
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel3.Controls.Add(this.lblAcceptedJobs);
+            this.panel3.Controls.Add(this.lblRegisteredItems);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Location = new System.Drawing.Point(162, 264);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(248, 109);
             this.panel3.TabIndex = 16;
             // 
-            // lblAcceptedJobs
+            // lblRegisteredItems
             // 
-            this.lblAcceptedJobs.AutoSize = true;
-            this.lblAcceptedJobs.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblAcceptedJobs.Location = new System.Drawing.Point(122, 56);
-            this.lblAcceptedJobs.Name = "lblAcceptedJobs";
-            this.lblAcceptedJobs.Size = new System.Drawing.Size(0, 23);
-            this.lblAcceptedJobs.TabIndex = 15;
+            this.lblRegisteredItems.AutoSize = true;
+            this.lblRegisteredItems.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblRegisteredItems.Location = new System.Drawing.Point(122, 56);
+            this.lblRegisteredItems.Name = "lblRegisteredItems";
+            this.lblRegisteredItems.Size = new System.Drawing.Size(0, 23);
+            this.lblRegisteredItems.TabIndex = 15;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(44, 12);
+            this.label3.Location = new System.Drawing.Point(41, 12);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(165, 23);
+            this.label3.Size = new System.Drawing.Size(188, 23);
             this.label3.TabIndex = 14;
-            this.label3.Text = "Total Accepted Jobs";
+            this.label3.Text = "Total Registered Items";
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel4.Controls.Add(this.lblJobsToday);
+            this.panel4.Controls.Add(this.lblDriverCount);
             this.panel4.Controls.Add(this.label4);
             this.panel4.Location = new System.Drawing.Point(463, 264);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(243, 109);
             this.panel4.TabIndex = 17;
             // 
-            // lblJobsToday
+            // lblDriverCount
             // 
-            this.lblJobsToday.AutoSize = true;
-            this.lblJobsToday.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblJobsToday.Location = new System.Drawing.Point(126, 56);
-            this.lblJobsToday.Name = "lblJobsToday";
-            this.lblJobsToday.Size = new System.Drawing.Size(0, 23);
-            this.lblJobsToday.TabIndex = 15;
+            this.lblDriverCount.AutoSize = true;
+            this.lblDriverCount.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblDriverCount.Location = new System.Drawing.Point(126, 56);
+            this.lblDriverCount.Name = "lblDriverCount";
+            this.lblDriverCount.Size = new System.Drawing.Size(0, 23);
+            this.lblDriverCount.TabIndex = 15;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(47, 12);
+            this.label4.Location = new System.Drawing.Point(76, 12);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(177, 23);
+            this.label4.Size = new System.Drawing.Size(110, 23);
             this.label4.TabIndex = 14;
-            this.label4.Text = "Total Completed Jobs";
+            this.label4.Text = "Total Drivers";
             // 
-            // CustomerDashBoard
+            // AdminDashBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -175,7 +175,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "CustomerDashBoard";
+            this.Name = "AdminDashBoard";
             this.Text = "CustomerDashBoard";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -195,13 +195,13 @@
         private Label customerIdNameLabel;
         private Label lblPendingJobs;
         private Panel panel2;
-        private Label lblDiscardedJobs;
+        private Label lblPendingCustomers;
         private Label label2;
         private Panel panel3;
-        private Label lblAcceptedJobs;
+        private Label lblRegisteredItems;
         private Label label3;
         private Panel panel4;
-        private Label lblJobsToday;
+        private Label lblDriverCount;
         private Label label4;
     }
 }

@@ -13,7 +13,7 @@ public class VehicleDaoImpl : IVehicleDao
         try
         {
             
-            var reader = CrudUtil.ExecuteSelectQuery("SELECT * from db.vehicle");
+            var reader = CrudUtil.ExecuteSelectQuery("SELECT * from vehicle");
 
             while (reader.Read()) {
                 listOfVehicles.Add(new Vehicle(reader.GetInt32(1),reader.GetString(0),

@@ -88,5 +88,10 @@ namespace e_shift.views
             jobAdView.BringToFront();
             jobAdView.Show();
         }
+
+        public static implicit operator JobContainer(AdminJobContainer v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

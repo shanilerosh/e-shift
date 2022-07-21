@@ -22,7 +22,7 @@ namespace e_shift.dao.custom.impl
 
             try
             {
-                SqlDataReader sqlDataReader = CrudUtil.ExecuteSelectQuery("SELECT TOP 1 uid from db.userdata WHERE username = @username", keyValPair);
+                SqlDataReader sqlDataReader = CrudUtil.ExecuteSelectQuery("SELECT TOP 1 uid from userdata WHERE username = @username", keyValPair);
 
                 return sqlDataReader.HasRows;
             }
@@ -33,22 +33,22 @@ namespace e_shift.dao.custom.impl
 
         }
 
-        public User? CheckWithUserNameAndPass(string username, string password)
+        public User? CheckWithUserNameAndPass(string username)
         {
             try
             {
                 var keyValPair = new Dictionary<string, object>();
 
                 keyValPair.Add("username", username);
-                keyValPair.Add("password", password);
 
-                SqlDataReader reader = CrudUtil.ExecuteSelectQuery("SELECT * from db.userdata WHERE username = @username AND password = @password", keyValPair);
+                SqlDataReader reader = CrudUtil.ExecuteSelectQuery("SELECT * from userdata WHERE username = @username", keyValPair);
 
             
                 if (reader.HasRows) {
                     while (reader.Read()) {
                         Role role = (Role) Enum.Parse(typeof(Role), reader.GetString(3));
-                        return new User(reader.GetInt32(0), reader.GetString(1),role);
+                        return new User(reader.GetInt32(0), reader.GetString(1),reader.GetString(2),
+                            role);
                     }
             
                 }
@@ -70,9 +70,9 @@ namespace e_shift.dao.custom.impl
                 try
                 {
                     using (var sqlDataReader = CrudUtil
-                               .ExecuteSelectQuery("SELECT TOP 1 * FROM db.userdata WHERE uid = '" + userId + "'"))
+                               .ExecuteSelectQuery("SELECT TOP 1 * FROM userdata WHERE uid = '" + userId + "'"))
                     {
-                        //.ExecuteSelectQuery("SELECT * FROM db.customer")) {
+                        //.ExecuteSelectQuery("SELECT * FROM customer")) {
                         if (sqlDataReader.HasRows)
                         {
 
@@ -104,7 +104,7 @@ namespace e_shift.dao.custom.impl
             keyValPair.Add("@username", userName);
             
             return CrudUtil
-                .ExecuteUpdateDelete("UPDATE db.userdata SET password = @password WHERE username = @username",
+                .ExecuteUpdateDelete("UPDATE userdata SET password = @password WHERE username = @username",
                     keyValPair);
         }
 
@@ -117,7 +117,7 @@ namespace e_shift.dao.custom.impl
 
                 keyValPair.Add("username", username);
 
-                SqlDataReader reader = CrudUtil.ExecuteSelectQuery("SELECT * from db.userdata WHERE username = @username", keyValPair);
+                SqlDataReader reader = CrudUtil.ExecuteSelectQuery("SELECT * from userdata WHERE username = @username", keyValPair);
 
 
                 if (reader.HasRows)
@@ -148,7 +148,7 @@ namespace e_shift.dao.custom.impl
             
 
 
-            return CrudUtil.ExecuteUpdateDelete("INSERT INTO db.userdata(username,password,role) VALUES (@username,@password,@role)",
+            return CrudUtil.ExecuteUpdateDelete("INSERT INTO userdata(username,password,role) VALUES (@username,@password,@role)",
                 keyValPair);
         }
         

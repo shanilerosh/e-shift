@@ -22,15 +22,9 @@ namespace e_shift.views
         {
             this._userDetail = userDto;  
             InitializeComponent();
-            SetDefaultResets();
-            SetPriviladges();
             SetUserData();          
         }
 
-        private void SetDefaultResets()
-        {
-            panelMainCustomer.Hide();
-        }
 
         private void SetUserData()
         {
@@ -39,14 +33,21 @@ namespace e_shift.views
                 lblUserName.Text = _userDetail.Username;
 
 
+                //check the type of user
                 if (_userDetail.Role == Role.CUSTOMER)
                 {
+                    //if customer retrieve customer obj from fb
                     _customer = new CustomerController()
-                        .findCustomerByUserId(_userDetail.Uid);
-                    
-                    panelMainCustomer.Show();
+                        .FindCustomerByUserId(_userDetail.Uid);
+
+                    CustomerPriviladges();
 
                     CustomerDashBoardView();
+                }
+                else {
+
+                    //admin dashboard
+                    AdminDashBoardView();
                 }
             }
             catch (InvalidDataException ex)
@@ -59,6 +60,14 @@ namespace e_shift.views
 
                 MessageBox.Show(Constants.SYSTEM_ERROR);
             }
+        }
+
+       
+        private void CustomerPriviladges()
+        {
+
+            btnItemsMain.Hide();
+            btnLoadMain.Hide();
         }
 
         private void SetPriviladges()
@@ -102,11 +111,24 @@ namespace e_shift.views
 
         private void Btn_Cust_Job_Panel_Click(object sender, EventArgs e)
         {
-            var jobContainer = new JobContainer(_customer);
-            jobContainer.TopLevel = false;
-            panelMain.Controls.Add(jobContainer);
-            jobContainer.BringToFront();
-            jobContainer.Show();
+
+ 
+
+            if (_userDetail.Role == Role.CUSTOMER)
+            {
+                var jobContainer = new JobContainer(_customer);
+                jobContainer.TopLevel = false;
+                panelMain.Controls.Add(jobContainer);
+                jobContainer.BringToFront();
+                jobContainer.Show();
+            }
+            else {
+                var jobContainer = new AdminJobContainer(_userDetail);
+                jobContainer.TopLevel = false;
+                panelMain.Controls.Add(jobContainer);
+                jobContainer.BringToFront();
+                jobContainer.Show();
+            } 
 
         }
 
@@ -117,7 +139,15 @@ namespace e_shift.views
 
         private void Btn_Customer_DashBoard_Click(object sender, EventArgs e)
         {
-            CustomerDashBoardView();
+            if (_userDetail.Role == Role.CUSTOMER)
+            {
+                CustomerDashBoardView();
+            }
+            else {
+                AdminDashBoardView();
+            }
+
+            
 
         }
 
@@ -130,13 +160,51 @@ namespace e_shift.views
             customerDashBoard.Show();
         }
 
+        private void AdminDashBoardView()
+        {
+
+            var adminDash = new AdminDashBoard();
+            adminDash.TopLevel = false;
+            panelMain.Controls.Add(adminDash);
+            adminDash.BringToFront();
+            adminDash.Show();
+        }
+
         private void Manage_Customer_Btn_Click(object sender, EventArgs e)
         {
-            var customerUpdate = new CustomerUpdateView(_customer);
-            customerUpdate.TopLevel = false;
-            panelMain.Controls.Add(customerUpdate);
-            customerUpdate.BringToFront();
-            customerUpdate.Show();
+
+            if (_userDetail.Role == Role.CUSTOMER)
+            {
+                var customerUpdate = new CustomerUpdateView(_customer);
+                customerUpdate.TopLevel = false;
+                panelMain.Controls.Add(customerUpdate);
+                customerUpdate.BringToFront();
+                customerUpdate.Show();
+            }else{
+                var customerUpdate = new CustomerAdminView();
+                customerUpdate.TopLevel = false;
+                panelMain.Controls.Add(customerUpdate);
+                customerUpdate.BringToFront();
+                customerUpdate.Show();
+            }
+        }
+
+        private void Btn_Item_Panel_Click(object sender, EventArgs e)
+        {
+            ItemView itemView = new ItemView();
+            itemView.TopLevel = false;
+            panelMain.Controls.Add(itemView);
+            itemView.BringToFront();
+            itemView.Show();
+        }
+
+        private void btnLoadMain_Click(object sender, EventArgs e)
+        {
+            AdminLoadContainer itemView = new AdminLoadContainer(_userDetail);
+            itemView.TopLevel = false;
+            panelMain.Controls.Add(itemView);
+            itemView.BringToFront();
+            itemView.Show();
         }
     }
 

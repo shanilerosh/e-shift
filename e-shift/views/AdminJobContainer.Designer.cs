@@ -44,9 +44,8 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 29);
+            this.panel1.Size = new System.Drawing.Size(821, 29);
             this.panel1.TabIndex = 0;
-            
             // 
             // button4
             // 
@@ -83,20 +82,18 @@
             this.panelJobMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelJobMain.Location = new System.Drawing.Point(0, 29);
             this.panelJobMain.Name = "panelJobMain";
-            this.panelJobMain.Size = new System.Drawing.Size(800, 421);
+            this.panelJobMain.Size = new System.Drawing.Size(821, 381);
             this.panelJobMain.TabIndex = 1;
-            
             // 
             // AdminJobContainer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(821, 410);
+            this.ControlBox = false;
             this.Controls.Add(this.panelJobMain);
             this.Controls.Add(this.panel1);
             this.Name = "AdminJobContainer";
-            this.Text = "JobContainer";
-            
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

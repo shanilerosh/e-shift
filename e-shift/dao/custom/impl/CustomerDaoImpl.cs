@@ -1,14 +1,8 @@
-﻿using e_shift.db;
-using e_shift.dto;
+﻿using System.Data;
+using System.Data.SqlClient;
+using e_shift.db;
 using e_shift.entity;
 using e_shift.utility;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace e_shift.dao.custom.impl
 {
@@ -36,7 +30,7 @@ namespace e_shift.dao.custom.impl
             {
                 //create the user first
                 var userCommand = new
-                    SqlCommand("INSERT INTO db.userdata(username,password,role) VALUES (@username,@password,@role); SELECT SCOPE_IDENTITY()", conn, transaction);
+                    SqlCommand("INSERT INTO userdata(username,password,role) VALUES (@username,@password,@role); SELECT SCOPE_IDENTITY()", conn, transaction);
                 userCommand.Parameters.AddWithValue("@username", user.Username);
                 userCommand.Parameters.AddWithValue("@password", user.Password);
                 userCommand.Parameters.AddWithValue("@role", user.Role.ToString());
@@ -45,7 +39,7 @@ namespace e_shift.dao.custom.impl
 
                 //create the customer entry
                 var custCommand = new
-                    SqlCommand("INSERT INTO db.customer(cid,firstname,lastname,nic,address,contactNumber,uid) Values (@cid,@firstName,@lastName,@nic,@address,@contactNumber,@uid)", conn, transaction);
+                    SqlCommand("INSERT INTO customer(cid,firstname,lastname,nic,address,contactNumber,uid,customerStatus) Values (@cid,@firstName,@lastName,@nic,@address,@contactNumber,@uid, @customerStatus)", conn, transaction);
 
                 custCommand.Parameters.AddWithValue("@cid", customer.Cid);
                 custCommand.Parameters.AddWithValue("@firstName", customer.FirstName);
@@ -54,6 +48,7 @@ namespace e_shift.dao.custom.impl
                 custCommand.Parameters.AddWithValue("@address", customer.Address);
                 custCommand.Parameters.AddWithValue("@contactNumber", customer.ContactNumber);
                 custCommand.Parameters.AddWithValue("@uid", userId);
+                custCommand.Parameters.AddWithValue("@customerStatus", customer.CustomerStatus.ToString());
 
                 var isDone = custCommand.ExecuteNonQuery();
                 //if success commit transaction
@@ -79,7 +74,7 @@ namespace e_shift.dao.custom.impl
             //adding cid for the where clause
             keyValPair.Add("@cid", id);
 
-            return CrudUtil.ExecuteUpdateDelete("DELETE FROM db.customer WHERE cid = @cid",
+            return CrudUtil.ExecuteUpdateDelete("DELETE FROM customer WHERE cid = @cid",
                 keyValPair);
         }
 
@@ -88,9 +83,9 @@ namespace e_shift.dao.custom.impl
             try
             {
                 using (SqlDataReader sqlDataReader = CrudUtil
-                   .ExecuteSelectQuery("SELECT TOP 1 * FROM db.customer WHERE cid = '"+custId+"'"))
+                   .ExecuteSelectQuery("SELECT TOP 1 * FROM customer WHERE cid = '"+custId+"'"))
                 {
-                    //.ExecuteSelectQuery("SELECT * FROM db.customer")) {
+                    //.ExecuteSelectQuery("SELECT * FROM customer")) {
                     if (sqlDataReader.HasRows)
                     {
 
@@ -119,20 +114,22 @@ namespace e_shift.dao.custom.impl
             try
             {
                 using (SqlDataReader sqlDataReader = CrudUtil
-                           .ExecuteSelectQuery("SELECT TOP 1 * FROM db.customer WHERE uid = '"+userId+"'"))
+                           .ExecuteSelectQuery("SELECT TOP 1 * FROM customer WHERE uid = '"+userId+"'"))
                 {
-                    //.ExecuteSelectQuery("SELECT * FROM db.customer")) {
+                    //.ExecuteSelectQuery("SELECT * FROM customer")) {
                     if (sqlDataReader.HasRows)
                     {
 
                         while (sqlDataReader.Read())
                         {
-                            
-                            return new Customer(sqlDataReader.GetString(0),
+                            var custStatus = (CustomerStatus)Enum.
+                                Parse(typeof(CustomerStatus), sqlDataReader.GetString(7));
+                            var customer = new Customer(sqlDataReader.GetString(0),
                                 sqlDataReader.GetString(1), sqlDataReader.GetString(2),
                                 sqlDataReader.GetString(3), sqlDataReader.GetString(4),
                                 sqlDataReader.GetString(5));
-                            
+                            customer.CustomerStatus = custStatus;
+                            return customer;
                         }
                     }
                 }
@@ -145,9 +142,30 @@ namespace e_shift.dao.custom.impl
             return null;
         }
 
+        public DataTable GetAllByStatus(CustomerStatus status)
+        {
+            return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT cid AS [ID],firstname AS [First Name], lastname AS" +
+                                                          " [Last Name], nic AS [NIC], address AS [Address],contactnumber AS [Contact Number], customerStatus as [Status] FROM " +
+                                                          "customer WHERE customerStatus = '"+status+"'");
+        }
+
+        public bool UpdateCustStatus(CustomerStatus status, string cid)
+        {
+            var keyValPair = new Dictionary<string, object>();
+
+            keyValPair.Add("@customerStatus", status.ToString());
+            keyValPair.Add("@cid", cid);
+
+            return CrudUtil
+                .ExecuteUpdateDelete("UPDATE customer SET customerStatus = @customerStatus WHERE cid = @cid",
+                    keyValPair);
+        }
+
         public DataTable GetAll()
         {
-            return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT * FROM db.customer");
+            return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT cid AS [ID],firstname AS [First Name], lastname AS" +
+                                                          " [Last Name], nic AS [NIC], address AS [Address],contactnumber AS [Contact Number], customerStatus as [Status] FROM " +
+                                                          "customer");
         }
 
         public string GetCustomerId()
@@ -155,9 +173,9 @@ namespace e_shift.dao.custom.impl
             try
             {
                 using (SqlDataReader sqlDataReader = CrudUtil
-                   .ExecuteSelectQuery("SELECT TOP 1 cid FROM db.customer ORDER BY cid DESC"))
+                   .ExecuteSelectQuery("SELECT TOP 1 cid FROM customer ORDER BY cid DESC"))
                 {
-                    //.ExecuteSelectQuery("SELECT * FROM db.customer")) {
+                    //.ExecuteSelectQuery("SELECT * FROM customer")) {
                     if (sqlDataReader.HasRows)
                     {
 
@@ -179,7 +197,7 @@ namespace e_shift.dao.custom.impl
         public DataTable SearchCustomers(string fields, string val)
         {
 
-            return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT * FROM db.customer WHERE "+ fields + " LIKE '%" +val+ "%'");
+            return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT * FROM customer WHERE "+ fields + " LIKE '%" +val+ "%'");
             
 
         }
@@ -196,7 +214,7 @@ namespace e_shift.dao.custom.impl
             keyValPair.Add("@cid", entity.Cid);
 
             return CrudUtil
-                .ExecuteUpdateDelete("UPDATE db.customer SET firstname = @firstName ,lastname = @lastname ,nic = @nic ,address = @address, contactnumber = @contactnumber WHERE cid = @cid",
+                .ExecuteUpdateDelete("UPDATE customer SET firstname = @firstName ,lastname = @lastname ,nic = @nic ,address = @address, contactnumber = @contactnumber WHERE cid = @cid",
                 keyValPair);
         }
     }

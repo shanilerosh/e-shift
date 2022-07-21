@@ -32,10 +32,12 @@
             this.lblUserName = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panelMainCustomer = new System.Windows.Forms.Panel();
-            this.btnDashBoardCust = new System.Windows.Forms.Button();
-            this.btnJobCustomer = new System.Windows.Forms.Button();
+            this.btnItemsMain = new System.Windows.Forms.Button();
+            this.btnLoadMain = new System.Windows.Forms.Button();
+            this.btnCustomerMain = new System.Windows.Forms.Button();
+            this.btnDashBoardMain = new System.Windows.Forms.Button();
+            this.btnJobMain = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panelMainCustomer.SuspendLayout();
             this.SuspendLayout();
@@ -74,35 +76,70 @@
             // 
             // panelMainCustomer
             // 
-            this.panelMainCustomer.Controls.Add(this.button1);
-            this.panelMainCustomer.Controls.Add(this.btnDashBoardCust);
-            this.panelMainCustomer.Controls.Add(this.btnJobCustomer);
-            this.panelMainCustomer.Location = new System.Drawing.Point(12, 75);
+            this.panelMainCustomer.Controls.Add(this.btnItemsMain);
+            this.panelMainCustomer.Controls.Add(this.btnLoadMain);
+            this.panelMainCustomer.Controls.Add(this.btnCustomerMain);
+            this.panelMainCustomer.Controls.Add(this.btnDashBoardMain);
+            this.panelMainCustomer.Controls.Add(this.btnJobMain);
+            this.panelMainCustomer.Location = new System.Drawing.Point(12, 45);
             this.panelMainCustomer.Name = "panelMainCustomer";
-            this.panelMainCustomer.Size = new System.Drawing.Size(124, 238);
+            this.panelMainCustomer.Size = new System.Drawing.Size(124, 359);
             this.panelMainCustomer.TabIndex = 5;
             // 
-            // btnDashBoardCust
+            // btnItemsMain
             // 
-            this.btnDashBoardCust.BackColor = System.Drawing.Color.LightSlateGray;
-            this.btnDashBoardCust.Location = new System.Drawing.Point(8, 27);
-            this.btnDashBoardCust.Name = "btnDashBoardCust";
-            this.btnDashBoardCust.Size = new System.Drawing.Size(113, 37);
-            this.btnDashBoardCust.TabIndex = 4;
-            this.btnDashBoardCust.Text = "Dashboard";
-            this.btnDashBoardCust.UseVisualStyleBackColor = false;
-            this.btnDashBoardCust.Click += new System.EventHandler(this.Btn_Customer_DashBoard_Click);
+            this.btnItemsMain.BackColor = System.Drawing.Color.SlateGray;
+            this.btnItemsMain.Location = new System.Drawing.Point(8, 321);
+            this.btnItemsMain.Name = "btnItemsMain";
+            this.btnItemsMain.Size = new System.Drawing.Size(113, 37);
+            this.btnItemsMain.TabIndex = 7;
+            this.btnItemsMain.Text = "Items";
+            this.btnItemsMain.UseVisualStyleBackColor = false;
+            this.btnItemsMain.Click += new System.EventHandler(this.Btn_Item_Panel_Click);
             // 
-            // btnJobCustomer
+            // btnLoadMain
             // 
-            this.btnJobCustomer.BackColor = System.Drawing.Color.SlateGray;
-            this.btnJobCustomer.Location = new System.Drawing.Point(8, 104);
-            this.btnJobCustomer.Name = "btnJobCustomer";
-            this.btnJobCustomer.Size = new System.Drawing.Size(113, 37);
-            this.btnJobCustomer.TabIndex = 3;
-            this.btnJobCustomer.Text = "Job";
-            this.btnJobCustomer.UseVisualStyleBackColor = false;
-            this.btnJobCustomer.Click += new System.EventHandler(this.Btn_Cust_Job_Panel_Click);
+            this.btnLoadMain.BackColor = System.Drawing.Color.SlateGray;
+            this.btnLoadMain.Location = new System.Drawing.Point(6, 242);
+            this.btnLoadMain.Name = "btnLoadMain";
+            this.btnLoadMain.Size = new System.Drawing.Size(113, 37);
+            this.btnLoadMain.TabIndex = 6;
+            this.btnLoadMain.Text = "Load";
+            this.btnLoadMain.UseVisualStyleBackColor = false;
+            this.btnLoadMain.Click += new System.EventHandler(this.btnLoadMain_Click);
+            // 
+            // btnCustomerMain
+            // 
+            this.btnCustomerMain.BackColor = System.Drawing.Color.SlateGray;
+            this.btnCustomerMain.Location = new System.Drawing.Point(7, 173);
+            this.btnCustomerMain.Name = "btnCustomerMain";
+            this.btnCustomerMain.Size = new System.Drawing.Size(113, 37);
+            this.btnCustomerMain.TabIndex = 5;
+            this.btnCustomerMain.Text = "Manage Customer";
+            this.btnCustomerMain.UseVisualStyleBackColor = false;
+            this.btnCustomerMain.Click += new System.EventHandler(this.Manage_Customer_Btn_Click);
+            // 
+            // btnDashBoardMain
+            // 
+            this.btnDashBoardMain.BackColor = System.Drawing.Color.LightSlateGray;
+            this.btnDashBoardMain.Location = new System.Drawing.Point(8, 27);
+            this.btnDashBoardMain.Name = "btnDashBoardMain";
+            this.btnDashBoardMain.Size = new System.Drawing.Size(113, 37);
+            this.btnDashBoardMain.TabIndex = 4;
+            this.btnDashBoardMain.Text = "Dashboard";
+            this.btnDashBoardMain.UseVisualStyleBackColor = false;
+            this.btnDashBoardMain.Click += new System.EventHandler(this.Btn_Customer_DashBoard_Click);
+            // 
+            // btnJobMain
+            // 
+            this.btnJobMain.BackColor = System.Drawing.Color.SlateGray;
+            this.btnJobMain.Location = new System.Drawing.Point(8, 104);
+            this.btnJobMain.Name = "btnJobMain";
+            this.btnJobMain.Size = new System.Drawing.Size(113, 37);
+            this.btnJobMain.TabIndex = 3;
+            this.btnJobMain.Text = "Job";
+            this.btnJobMain.UseVisualStyleBackColor = false;
+            this.btnJobMain.Click += new System.EventHandler(this.Btn_Cust_Job_Panel_Click);
             // 
             // panelMain
             // 
@@ -112,17 +149,6 @@
             this.panelMain.Size = new System.Drawing.Size(815, 447);
             this.panelMain.TabIndex = 1;
             this.panelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMain_Paint);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.SlateGray;
-            this.button1.Location = new System.Drawing.Point(7, 178);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 37);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Manage Customer";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Manage_Customer_Btn_Click);
             // 
             // MainPanelView
             // 
@@ -143,13 +169,15 @@
 
         #endregion
 
-        private Button btnJobCustomer;
+        private Button btnJobMain;
         private Panel panel1;
         private Panel panelMain;
-        private Button btnDashBoardCust;
+        private Button btnDashBoardMain;
         private Panel panelMainCustomer;
         private Label label3;
         private Label lblUserName;
-        private Button button1;
+        private Button btnCustomerMain;
+        private Button btnLoadMain;
+        private Button btnItemsMain;
     }
 }

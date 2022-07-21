@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using e_shift.utility;
 
 namespace e_shift.dao.custom
 {
@@ -19,5 +20,7 @@ namespace e_shift.dao.custom
 
         Customer findByCustId(string custId);
         Customer findByUserId(int userId);
+        DataTable GetAllByStatus(CustomerStatus status);
+        bool UpdateCustStatus(CustomerStatus status, string text);
     }
 }

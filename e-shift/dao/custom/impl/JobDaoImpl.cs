@@ -26,7 +26,7 @@ namespace e_shift.dao.custom.impl
             {
                 //insert to master job table
                 var jobCommand = new
-                    SqlCommand("INSERT INTO db.job(jobId,jobLocation,requiredDateTime,custId,jobStatus,remarks) VALUES (@jobId,@jobLocation,@requiredDateTime,@custId,@jobStatus,@remarks)", conn, transaction);
+                    SqlCommand("INSERT INTO job(jobId,jobLocation,requiredDateTime,custId,jobStatus,remarks) VALUES (@jobId,@jobLocation,@requiredDateTime,@custId,@jobStatus,@remarks)", conn, transaction);
                 jobCommand.Parameters.AddWithValue("@jobId", job.JobId);
                 jobCommand.Parameters.AddWithValue("@jobLocation", job.Location);
                 jobCommand.Parameters.AddWithValue("@requiredDateTime", job.RequiredDate);
@@ -42,7 +42,7 @@ namespace e_shift.dao.custom.impl
                 foreach (var jobItem in job.ItemNameList)
                 {
                     var jobDetailsCommand = new
-                    SqlCommand("INSERT INTO db.jobDetail(jobId,iid,qty) Values (@jobId,@iid,@qty)", conn, transaction);
+                    SqlCommand("INSERT INTO jobDetail(jobId,iid,qty) Values (@jobId,@iid,@qty)", conn, transaction);
 
                     jobDetailsCommand.Parameters.AddWithValue("@jobId", job.JobId);
                     jobDetailsCommand.Parameters.AddWithValue("@iid", jobItem.Iid);
@@ -72,7 +72,7 @@ namespace e_shift.dao.custom.impl
         {
 
             return CrudUtil.ExecuteSelectQueryForDataGrid("SELECT jobId AS [Job Id],jobLocation As [Location],createdDateTime AS [Created At],jobStatus As [Job Status]" +
-                                                          " FROM db.job WHERE jobStatus = '" + status +
+                                                          " FROM job WHERE jobStatus = '" + status +
                                                    "' AND custId = '" + loggdUserCid + "' ORDER BY createdDateTime DESC");
         }
 
@@ -81,7 +81,7 @@ namespace e_shift.dao.custom.impl
             try
             {
                 using (SqlDataReader sqlDataReader = CrudUtil
-                           .ExecuteSelectQuery("SELECT TOP 1 * FROM db.job WHERE jobId = '"+jobId+"'"))
+                           .ExecuteSelectQuery("SELECT TOP 1 * FROM job WHERE jobId = '"+jobId+"'"))
                 {
                     if (sqlDataReader.HasRows)
                     {
@@ -113,8 +113,8 @@ namespace e_shift.dao.custom.impl
             {
                 
                 using (SqlDataReader sqlDataReader = CrudUtil
-                           .ExecuteSelectQuery(string.Format(@"Select item.itemName, job.qty FROM db.jobDetail As job
-                    INNER JOIN db.item As item ON job.iid = item.iid
+                           .ExecuteSelectQuery(string.Format(@"Select item.itemName, job.qty FROM jobDetail As job
+                    INNER JOIN item As item ON job.iid = item.iid
                 WHERE jobId = '{0}'", id)))
                 {
                     if (sqlDataReader.HasRows)
@@ -148,7 +148,7 @@ namespace e_shift.dao.custom.impl
             try
             {
                 //insert to master job table
-                using (var jobCommand = new SqlCommand("UPDATE db.job SET jobLocation = @jobLocation , requiredDateTime = @requiredDateTime ,remarks = @remarks WHERE jobId = @jobId", conn, transaction))
+                using (var jobCommand = new SqlCommand("UPDATE job SET jobLocation = @jobLocation , requiredDateTime = @requiredDateTime ,remarks = @remarks WHERE jobId = @jobId", conn, transaction))
                 {
                     jobCommand.Parameters.AddWithValue("@jobLocation", job.Location);
                     jobCommand.Parameters.AddWithValue("@requiredDateTime", job.RequiredDate);
@@ -160,7 +160,7 @@ namespace e_shift.dao.custom.impl
                 }
 
                 //delete all records associate table
-                using (var jobDetailDeleteCmd = new SqlCommand("DELETE from db.jobDetail WHERE jobId = @jobId", conn, transaction))
+                using (var jobDetailDeleteCmd = new SqlCommand("DELETE from jobDetail WHERE jobId = @jobId", conn, transaction))
                 {
                     jobDetailDeleteCmd.Parameters.AddWithValue("@jobId", jobId);
 
@@ -171,7 +171,7 @@ namespace e_shift.dao.custom.impl
 
                 foreach (var jobItem in job.ItemNameList)
                 {
-                    using (var jobDetailsCommand = new SqlCommand("INSERT INTO db.jobDetail(jobId,iid,qty) Values (@jobId,@iid,@qty)", conn, transaction))
+                    using (var jobDetailsCommand = new SqlCommand("INSERT INTO jobDetail(jobId,iid,qty) Values (@jobId,@iid,@qty)", conn, transaction))
                     {
                         jobDetailsCommand.Parameters.AddWithValue("@jobId", job.JobId);
                         jobDetailsCommand.Parameters.AddWithValue("@iid", jobItem.Iid);
@@ -203,7 +203,7 @@ namespace e_shift.dao.custom.impl
             return CrudUtil.ExecuteSelectQueryForDataGrid(
                 $"SELECT jobId AS [Job Id],jobLocation" +
                 $" As [Location],createdDateTime AS [Created At],jobStatus As [Job Status],c.firstname AS [Customer Name]" +
-                $" FROM db.job INNER JOIN db.customer c on c.cid = job.custId WHERE jobStatus = '{status}' ORDER BY createdDateTime DESC");
+                $" FROM job INNER JOIN customer c on c.cid = job.custId WHERE jobStatus = '{status}' ORDER BY createdDateTime DESC");
         }
 
         public bool UpdateJobStatus(string jobId, string status)
@@ -216,7 +216,7 @@ namespace e_shift.dao.custom.impl
             try
             {
                 //insert to master job table
-                using (var jobCommand = new SqlCommand("UPDATE db.job SET jobStatus = @jobStatus WHERE jobId = @jobId", conn))
+                using (var jobCommand = new SqlCommand("UPDATE job SET jobStatus = @jobStatus WHERE jobId = @jobId", conn))
                 {
                     jobCommand.Parameters.AddWithValue("@jobStatus", status);
                     jobCommand.Parameters.AddWithValue("@jobId", jobId);
@@ -238,9 +238,9 @@ namespace e_shift.dao.custom.impl
             try
             {
                 using (SqlDataReader sqlDataReader = CrudUtil
-                   .ExecuteSelectQuery("SELECT TOP 1 jobId FROM db.job ORDER BY jobId DESC"))
+                   .ExecuteSelectQuery("SELECT TOP 1 jobId FROM job ORDER BY jobId DESC"))
                 {
-                    //.ExecuteSelectQuery("SELECT * FROM db.customer")) {
+                    //.ExecuteSelectQuery("SELECT * FROM customer")) {
                     if (sqlDataReader.HasRows)
                     {
 

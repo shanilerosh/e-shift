@@ -34,6 +34,9 @@
         public static readonly string SUCCESSFULLY_LOAD_CREATED =
             "Load Successfully Created";
         
+        public static readonly string SUCCESSFULLY_CUSTOMER_UPDATED =
+            "Customer Updated Successfully";
+        
         
         public static readonly string PRE_PASS_INVALID = 
             "Invalid Previous Password Entered. Please try again";

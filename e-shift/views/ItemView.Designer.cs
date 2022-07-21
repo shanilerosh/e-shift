@@ -54,7 +54,7 @@
             this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(10, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(293, 29);
+            this.label1.Size = new System.Drawing.Size(243, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Item Unit Management";
             // 
@@ -62,7 +62,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(49, 112);
+            this.label4.Location = new System.Drawing.Point(49, 99);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(63, 14);
             this.label4.TabIndex = 3;
@@ -72,7 +72,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(347, 108);
+            this.label5.Location = new System.Drawing.Point(347, 95);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(51, 14);
             this.label5.TabIndex = 4;
@@ -80,7 +80,7 @@
             // 
             // txtItemName
             // 
-            this.txtItemName.Location = new System.Drawing.Point(46, 131);
+            this.txtItemName.Location = new System.Drawing.Point(46, 118);
             this.txtItemName.Name = "txtItemName";
             this.txtItemName.Size = new System.Drawing.Size(179, 23);
             this.txtItemName.TabIndex = 7;
@@ -92,7 +92,7 @@
             this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubmit.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnSubmit.ForeColor = System.Drawing.Color.White;
-            this.btnSubmit.Location = new System.Drawing.Point(486, 246);
+            this.btnSubmit.Location = new System.Drawing.Point(488, 184);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(85, 23);
             this.btnSubmit.TabIndex = 9;
@@ -107,7 +107,7 @@
             this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReset.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnReset.ForeColor = System.Drawing.Color.White;
-            this.btnReset.Location = new System.Drawing.Point(48, 244);
+            this.btnReset.Location = new System.Drawing.Point(50, 182);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 10;
@@ -119,12 +119,12 @@
             // 
             this.gridItems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridItems.Location = new System.Drawing.Point(46, 338);
+            this.gridItems.Location = new System.Drawing.Point(46, 260);
             this.gridItems.MultiSelect = false;
             this.gridItems.Name = "gridItems";
             this.gridItems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.gridItems.RowTemplate.Height = 25;
-            this.gridItems.Size = new System.Drawing.Size(654, 196);
+            this.gridItems.Size = new System.Drawing.Size(654, 182);
             this.gridItems.TabIndex = 11;
             this.gridItems.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.On_Row_Click);
             // 
@@ -154,7 +154,7 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(600, 244);
+            this.btnDelete.Location = new System.Drawing.Point(602, 182);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(80, 24);
             this.btnDelete.TabIndex = 14;
@@ -164,7 +164,7 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(167, 309);
+            this.txtSearch.Location = new System.Drawing.Point(167, 227);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PlaceholderText = "Type to search";
             this.txtSearch.Size = new System.Drawing.Size(204, 23);
@@ -175,7 +175,7 @@
             // 
             this.searchCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.searchCombo.FormattingEnabled = true;
-            this.searchCombo.Location = new System.Drawing.Point(50, 309);
+            this.searchCombo.Location = new System.Drawing.Point(50, 227);
             this.searchCombo.Name = "searchCombo";
             this.searchCombo.Size = new System.Drawing.Size(93, 23);
             this.searchCombo.TabIndex = 16;
@@ -185,16 +185,16 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(248)))), ((int)(((byte)(247)))));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(2, -1);
+            this.panel1.Location = new System.Drawing.Point(-1, -1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1196, 55);
+            this.panel1.Size = new System.Drawing.Size(1199, 55);
             this.panel1.TabIndex = 17;
             // 
             // txtRemark
             // 
-            this.txtRemark.Location = new System.Drawing.Point(347, 129);
+            this.txtRemark.Location = new System.Drawing.Point(347, 116);
             this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(333, 87);
+            this.txtRemark.Size = new System.Drawing.Size(333, 54);
             this.txtRemark.TabIndex = 18;
             this.txtRemark.Text = "";
             // 
@@ -204,7 +204,7 @@
             this.label6.BackColor = System.Drawing.SystemColors.Window;
             this.label6.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(203)))), ((int)(((byte)(135)))));
-            this.label6.Location = new System.Drawing.Point(46, 72);
+            this.label6.Location = new System.Drawing.Point(46, 58);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(83, 23);
             this.label6.TabIndex = 1;
@@ -215,7 +215,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(719, 546);
+            this.ClientSize = new System.Drawing.Size(815, 454);
+            this.ControlBox = false;
             this.Controls.Add(this.txtRemark);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.panel1);
@@ -233,7 +234,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.Name = "ItemView";
-            this.Text = "Item View";
             ((System.ComponentModel.ISupportInitialize)(this.gridItems)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

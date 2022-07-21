@@ -20,7 +20,7 @@ namespace e_shift.dao.custom.impl
             {
                 
                 using (SqlDataReader sqlDataReader = CrudUtil
-                           .ExecuteSelectQuery("SELECT * FROM db.driver"))
+                           .ExecuteSelectQuery("SELECT * FROM driver"))
                 {
                     if (sqlDataReader.HasRows)
                     {
