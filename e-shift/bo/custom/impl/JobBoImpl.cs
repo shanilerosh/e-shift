@@ -90,12 +90,12 @@ namespace e_shift.bo.custom.impl
         public JobDto FetchJobDtoByJobId(string jobId)
         {
             //fetch the job object
-            var job = dao.findJobById(jobId);
+            var job = dao.FindJobById(jobId);
             
             Assert.IsNull(job, "No job found with the id "+job.JobId);
             
             //fetch item data
-            var jobItemDtos = dao.findListOfItemsByJobId(jobId).Select(obj => JobItemDto.Builder().WithQty(obj.Qty.ToString()).WithItemName(obj.ItemName)
+            var jobItemDtos = dao.FindListOfItemsByJobId(jobId).Select(obj => JobItemDto.Builder().WithQty(obj.Qty.ToString()).WithItemName(obj.ItemName)
                 .Build()).ToList();
 
             var jobDto = JobDto.Builder().WithLocation(job.Location)
@@ -110,7 +110,7 @@ namespace e_shift.bo.custom.impl
         public bool UpdateJob(JobDto jobDto, string jobId)
         {
             //fetch the job object
-            var job = dao.findJobById(jobId);
+            var job = dao.FindJobById(jobId);
             
             Assert.IsNull(job, "No job found with the id "+job.JobId);
 
@@ -163,7 +163,7 @@ namespace e_shift.bo.custom.impl
         public bool DeclineAcceptJob(string jobId, Status status)
         {
             //fetch the job object
-            var job = dao.findJobById(jobId);
+            var job = dao.FindJobById(jobId);
             
             Assert.IsNull(job, "No job found with the id "+job.JobId);
             

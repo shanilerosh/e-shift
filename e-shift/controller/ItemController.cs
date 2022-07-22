@@ -12,34 +12,36 @@ namespace e_shift.controller
 {
     internal class ItemController
     {
+
+        private IItemUnitBo _bo = new ItemUnitBoImpl();
         
         public bool SaveItem(ItemDto item) {
-            return new ItemUnitBoImpl().AddItem(item);
+            return _bo.AddItem(item);
         }
 
         public bool UpdateItem(ItemDto item, string id)
         {
-            return new ItemUnitBoImpl().UpdateItem(item, id);
+            return _bo.UpdateItem(item, id);
         }
 
         public bool DeleteItem(string id)
         {
-            return new ItemUnitBoImpl().DeleteItem(id);
+            return _bo.DeleteItem(id);
         }
 
         public DataTable GetAllItems()
         {
-            return new ItemUnitBoImpl().GetAllItems();
+            return _bo.GetAllItems();
         }
 
         public string GetItemId()
         {
-            return new ItemUnitBoImpl().GetItemId();
+            return _bo.GetItemId();
         }
 
         public DataTable SearchItem(string atr, string search)
         {
-            return new ItemUnitBoImpl().GetItem(atr, search);
+            return _bo.GetItem(atr, search);
         }
 
 

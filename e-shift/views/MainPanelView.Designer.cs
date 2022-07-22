@@ -93,7 +93,7 @@
             this.btnItemsMain.Name = "btnItemsMain";
             this.btnItemsMain.Size = new System.Drawing.Size(113, 37);
             this.btnItemsMain.TabIndex = 7;
-            this.btnItemsMain.Text = "Items";
+            this.btnItemsMain.Text = "Paraameters";
             this.btnItemsMain.UseVisualStyleBackColor = false;
             this.btnItemsMain.Click += new System.EventHandler(this.Btn_Item_Panel_Click);
             // 
@@ -158,7 +158,7 @@
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panel1);
             this.Name = "MainPanelView";
-            this.Text = "MainPanelView";
+            this.Text = "E Shift";
             this.Load += new System.EventHandler(this.MainPanelView_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

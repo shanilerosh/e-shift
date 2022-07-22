@@ -14,7 +14,7 @@ public class ILoadBoImpl : ILoadBo
     
     public bool CreateLoad(string jobId, List<LoadItemDto> loadItemDtos)
     {
-        var job = _jobDao.findJobById(jobId);
+        var job = _jobDao.FindJobById(jobId);
         
         Assert.IsNull(job, "Job Is null with the ID "+ jobId);
 

@@ -191,7 +191,7 @@ namespace e_shift.views
 
         private void Btn_Item_Panel_Click(object sender, EventArgs e)
         {
-            ItemView itemView = new ItemView();
+            ParameterContainer itemView = new ParameterContainer(_userDetail);
             itemView.TopLevel = false;
             panelMain.Controls.Add(itemView);
             itemView.BringToFront();

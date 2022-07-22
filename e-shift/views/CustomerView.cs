@@ -69,8 +69,7 @@ namespace e_shift.views
                         .Build();
 
                 bool isSuccess =  new CustomerController().SaveCustomer(customerDto);
-
-
+                
                 //after submit 
                 if (isSuccess)
                 {

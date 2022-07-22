@@ -42,7 +42,7 @@ namespace e_shift.views
 
         private void Completed_Job_Click_Handle(object sender, EventArgs e)
         {
-            LoadSpecificView(Status.ACCEPTED);
+            LoadSpecificView(Status.COMPLETED);
 
         }
     }

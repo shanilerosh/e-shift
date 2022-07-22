@@ -76,7 +76,7 @@ namespace e_shift.dao.custom.impl
                                                    "' AND custId = '" + loggdUserCid + "' ORDER BY createdDateTime DESC");
         }
 
-        public Job findJobById(string jobId)
+        public Job FindJobById(string jobId)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace e_shift.dao.custom.impl
             return null;
         }
 
-        public List<Item> findListOfItemsByJobId(string id)
+        public IEnumerable<Item> FindListOfItemsByJobId(string id)
         {
 
             var listOfItems = new List<Item>();

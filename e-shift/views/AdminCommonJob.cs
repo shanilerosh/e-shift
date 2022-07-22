@@ -60,7 +60,8 @@ namespace e_shift.views
             {
                 Status.PENDING => "Pending Jobs",
                 Status.ACCEPTED => "Accepted Jobs",
-                _ => "Decline Jobs"
+                Status.COMPLETED => "Completed Jobs",
+                _ => "NOT Applicable"
             };
 
             lblHeader.Text = heading;

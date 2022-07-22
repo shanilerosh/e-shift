@@ -12,14 +12,14 @@ namespace e_shift.dao.custom
 {
     internal interface IJobDao
     {
-        String GetJobID();
+        string GetJobID();
 
         bool CreateJob(Job job);
         DataTable GetJobDataByStatusAndCustId(Status pending, string loggdUserCid);
 
-        Job findJobById(String jobId);
+        Job FindJobById(String jobId);
 
-        List<Item> findListOfItemsByJobId(String id);
+        IEnumerable<Item> FindListOfItemsByJobId(String id);
         bool UpdateJob(string jobId, Job job);
         DataTable GetJobDataByStatus(string toString);
         bool UpdateJobStatus(string jobId, string toString);

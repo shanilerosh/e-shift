@@ -45,12 +45,17 @@ namespace e_shift.views
             ComboBoxItem remark = new ComboBoxItem();
             remark.Text = "Remark";
             remark.Value = "remark";
+            
+            ComboBoxItem minToCarry = new ComboBoxItem();
+            minToCarry.Text = "Minimum To Carry";
+            minToCarry.Value = "minToCarry";
 
 
 
             searchCombo.Items.Add(itemName);
             searchCombo.Items.Add(remark);
             searchCombo.Items.Add(itemId);
+            searchCombo.Items.Add(minToCarry);
             
             searchCombo.SelectedIndex = 0;
         }
@@ -81,6 +86,7 @@ namespace e_shift.views
             gridItems.Columns[0].HeaderText = "Item ID";
             gridItems.Columns[1].HeaderText = "Item Name";
             gridItems.Columns[2].HeaderText = "Remark";
+            gridItems.Columns[3].HeaderText = "Min to Carry";
         }
 
         public void SetItemId()
@@ -110,13 +116,14 @@ namespace e_shift.views
 
             string itemName = txtItemName.Text;
             string reamrk= txtRemark.Text;
+            string minTOCary = txtMinToCarry.Text;
 
             
             try
             {
                 //Initialize dto with a builder
                 var itemDto = ItemDto.Builder().WithItemName(itemName)
-                    .WithRemark(reamrk).Build();
+                    .WithRemark(reamrk).WithMinToCarry(minTOCary).Build();
 
                 bool isSuccess;
 
@@ -212,10 +219,12 @@ namespace e_shift.views
                 string? iid = gridItems.SelectedRows[0].Cells[0].Value.ToString();
                 string? itemName = gridItems.SelectedRows[0].Cells[1].Value.ToString();
                 string? remark = gridItems.SelectedRows[0].Cells[2].Value.ToString();
+                string? minToCarry = gridItems.SelectedRows[0].Cells[3].Value.ToString();
 
 
                 txtItemName.Text = itemName;
                 txtRemark.Text = remark;
+                txtMinToCarry.Text = minToCarry;
 
                 lblItemId.Text = iid;
             }
@@ -261,5 +270,6 @@ namespace e_shift.views
             ChangeHeaderNames();
         }
 
+        
     }
 }  

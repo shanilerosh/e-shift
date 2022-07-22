@@ -12,15 +12,17 @@ namespace e_shift.entity
         private String _iid;
         private String _remark;
         private String _itemName;
+        private int _minToCarry;
 
         //for keeping item qty
         private int qty;
 
-        public Item(string iid, string remark, string itemName)
+        public Item(string iid, string remark, string itemName, int minToCarry)
         {
             _iid = iid;
             _remark = remark;
             _itemName = itemName;
+            _minToCarry = minToCarry;
         }
 
         public Item(string itemName, int qty)
@@ -33,5 +35,7 @@ namespace e_shift.entity
         public string Remark { get => _remark; set => _remark = value; }
         public string ItemName { get => _itemName; set => _itemName = value; }
         public int Qty { get => qty; set => qty = value; }
+        
+        public int MinToCarry{ get => _minToCarry; set => _minToCarry = value; }
     }
 }

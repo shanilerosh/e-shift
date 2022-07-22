@@ -16,14 +16,14 @@ namespace e_shift.views
 
             InitializeComponent();
 
-            LoadSpecificView(Status.PENDING);
+            LoadSpecificView(Status.ACCEPTED);
         }
 
         
 
         private void LoadSpecificView(Status status)
         {
-            var adminCommonJob = new AdminCommonJob(status);
+            var adminCommonJob = new AdminCommonLoad(status);
             adminCommonJob.TopLevel = false;
             panelJobMain.Controls.Add(adminCommonJob);
             adminCommonJob.BringToFront();
@@ -32,18 +32,8 @@ namespace e_shift.views
 
         private void Pending_Button_Click_Handle(object sender, EventArgs e)
         {
-            LoadSpecificView(Status.PENDING);
-        }
-
-        private void Declined_Job_Click_Handle(object sender, EventArgs e)
-        {
-            LoadSpecificView(Status.DECLINED);
-        }
-
-        private void Completed_Job_Click_Handle(object sender, EventArgs e)
-        {
             LoadSpecificView(Status.ACCEPTED);
-
         }
+        
     }
 }

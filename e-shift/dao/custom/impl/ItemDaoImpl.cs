@@ -24,8 +24,9 @@ namespace e_shift.dao.custom.impl
                 keyValPair.Add("@iid", entity.Iid);
                 keyValPair.Add("@itemName", entity.ItemName);
                 keyValPair.Add("@remark", entity.Remark);
+                keyValPair.Add("@minToCarry", entity.MinToCarry);
 
-                return CrudUtil.ExecuteUpdateDelete("INSERT INTO item(iid,itemName,remark) Values (@iid,@itemName,@remark)",
+                return CrudUtil.ExecuteUpdateDelete("INSERT INTO item(iid,itemName,remark,minToCarry) Values (@iid,@itemName,@remark,@minToCarry)",
                     keyValPair);
             
         }
@@ -61,7 +62,8 @@ namespace e_shift.dao.custom.impl
                         while (sqlDataReader.Read())
                         {
                             return new Item(sqlDataReader.GetString(0),
-                                sqlDataReader.GetString(2), sqlDataReader.GetString(1));
+                                sqlDataReader.GetString(2), sqlDataReader.GetString(1),
+                                int.Parse(sqlDataReader.GetString(3)));
                         }
                     }
                 }
@@ -114,9 +116,10 @@ namespace e_shift.dao.custom.impl
             keyValPair.Add("@itemName", entity.ItemName);
             keyValPair.Add("@remark", entity.Remark);
             keyValPair.Add("@iid", entity.Iid);
+            keyValPair.Add("@minToCarry", entity.MinToCarry);
 
             return CrudUtil
-                .ExecuteUpdateDelete("UPDATE item SET itemName = @itemName ,remark = @remark WHERE iid = @iid",
+                .ExecuteUpdateDelete("UPDATE item SET itemName = @itemName ,remark = @remark,minToCarry = @minToCarry WHERE iid = @iid",
                 keyValPair);
         }
     }

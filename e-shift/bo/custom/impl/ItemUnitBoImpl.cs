@@ -26,7 +26,7 @@ namespace e_shift.bo.custom.impl
             }
             
             return dao
-                .Add(new Item(GetItemId(), item.Remark, item.ItemName));
+                .Add(new Item(GetItemId(), item.Remark, item.ItemName, item.MinToCarry));
         }
 
         public bool DeleteItem(string tsId)
@@ -83,7 +83,7 @@ namespace e_shift.bo.custom.impl
 
         public bool UpdateItem(ItemDto item, string iid)
         {
-            return dao.Update(new Item(iid, item.Remark, item.ItemName));
+            return dao.Update(new Item(iid, item.Remark, item.ItemName,item.MinToCarry));
         }
     }
 }
